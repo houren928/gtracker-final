@@ -1,5 +1,5 @@
 <?php 
-include_once "config.php"; // Always include the database oconnection before accessing the database
+include_once "include/config.php"; // Always include the database oconnection before accessing the database
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +19,8 @@ include_once "config.php"; // Always include the database oconnection before acc
     <link rel="icon" type="image/png" sizes="512x512" href="assets/img/android-chrome-512x512.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Just add style to the warning if login fail due to errors -->
+    <link rel="stylesheet" href="css/register-login.css">
 </head>
 
 <body>
@@ -38,22 +40,11 @@ include_once "config.php"; // Always include the database oconnection before acc
                         <div class="mb-4">
                             <label for="myLogInEmail" class="form-label"><strong>Email</strong></label>
                             <input type="email" class="form-control" id="myLogInEmail" name="email" placeholder="Enter Email" required>
-                            <!-- <?php
-                                 if(!isset($_GET['error'])){
-                                    echo("<div class='valid-feedback'>Valid.</div>");
-                                 }
-                            ?> -->
+                            <div class='valid-feedback'>
+                                Valid
+                            </div>
                             <div class="invalid-feedback">
-                            <?php
-                                 if(isset($_GET['error'])){
-                                    $errorMsg = $_GET['error'];
-                                    if(strcmp($errorMsg, "accountdoesnotexist") == 0){
-                                        echo("Account does not exist. Please try again.");
-                                    } 
-                                }else{
-                                    echo("Please provide a valid email.");
-                                }
-                            ?>
+                                Please provide a valid email.
                             </div>
                         </div>
 
@@ -63,35 +54,36 @@ include_once "config.php"; // Always include the database oconnection before acc
                                     <label for="myLogInPassword" class="form-label"><strong>Password</strong></label>
                                 </div>
                                 <div class="col text-end">
-                                    <a href="register-email.html">Forget Password?</a>
+                                    <a href="reset-password.php?type=<?php echo($_GET['type'])?>">Forget Password?</a>
                                 </div>
                             </div>
                             <input type="password" class="form-control" id="myLogInPassword" name="password" placeholder="Enter Password" required>
-                            <!-- <?php
-                                 if(!isset($_GET['error'])){
-                                    echo("<div class='valid-feedback'>Valid.</div>");
-                                 }
-                            ?> -->
+                            <div class='valid-feedback'>
+                                Valid
+                            </div>
                             <div class="invalid-feedback">
-                            <?php
-                                 if(isset($_GET['error'])){
-                                    $errorMsg = $_GET['error'];
-                                    if(strcmp($errorMsg, "wrongpassword") == 0){
-                                        echo("Password entered is wrong. Please try again.");
-                                    } 
-                                }else{
-                                    echo(" Please fill out this field.");
-                                }
-                            ?>
+                            Please fill out this field.
                             </div>
                             <div class="text-end">
                                 <input type="checkbox" onclick="myLogIn()"> Show Password
                             </div>
+                            <?php
+                                 if(isset($_GET['error'])){
+                                    $errorMsg = $_GET['error'];
+                                    if(strcmp($errorMsg, "wrongpassword") == 0){
+                                        echo("<p class=\"register-login-fail-warning\">Password entered is wrong. Please try again.</p>");
+                                    }else if (strcmp($errorMsg, "accountdoesnotexist") == 0){
+                                        echo("<p class=\"register-login-fail-warning\">Account does not exist. Please try again.</p>");
+                                    }
+                                    else{
+                                        echo("<p class=\"register-login-fail-warning\">Opps...Something went wrong. Please try again later.</p>");
+                                    }
+                                }
+                            ?>
                         </div>
-                        <button class="btn btn-success btn-block w-100" type="submit">Log in</button>
+                        <button class="btn btn-success btn-block w-100" type="submit" name='loginBtn' value='login'>Log in</button>
                         <hr>
                     </form>
-
                 </div>
             </div>
 

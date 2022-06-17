@@ -1,5 +1,5 @@
 <?php 
-include_once "config.php"; // Always include the database oconnection before accessing the database
+include_once "include/config.php"; // Always include the database oconnection before accessing the database
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +19,8 @@ include_once "config.php"; // Always include the database oconnection before acc
     <link rel="icon" type="image/png" sizes="512x512" href="assets/img/android-chrome-512x512.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Just add style to the warning if sign up fail due to existing email -->
+    <link rel="stylesheet" href="css/register-login.css">
 
 </head>
 
@@ -34,40 +36,41 @@ include_once "config.php"; // Always include the database oconnection before acc
 
             <div class="row justify-content-center">
                 <div class="col-5">
-                    <form action="signupProcess.php?type=<?php echo($_GET['type'])?>" class="needs-validation" novalidate method="post">
+                    <form action="signupProcess.php?type=<?php echo($_GET['type'])?><?php if(isset($_GET['response'])){echo "&response=".$_GET['response']."&mid=".$_GET['mid'];}?>" class="needs-validation" novalidate method="post">
                         <div class="mb-4">
                             <label for="mySignUpEmail" class="form-label"><strong>Email</strong></label>
                             <input type="email" class="form-control" id="mySignUpEmail" name="email" placeholder="Enter Email" required>
-                            <!-- <div class="valid-feedback">
+                            <div class="valid-feedback">
                                 Valid.
-                            </div> -->
-                           <div class="invalid-feedback">
-                            <?php
-                                if(isset($_GET["error"])){
-                                    echo("Email already exists. Please try another email.");
-                                }
-                                else{
-                                    echo("Please provide a valid email.");
-                                }
-                            ?>
                             </div>
+                           <div class="invalid-feedback">
+                               Please provide a valid email.
+                           </div>
                         </div>
                         <div class="mb-4">
                             <label for="mySignUpPassword" class="form-label"><strong>Password</strong></label>
                             <input type="password" class="form-control" id="mySignUpPassword" name="password" placeholder="Enter Password" required>
-                            <!-- <div class="valid-feedback">
+                            <div class="valid-feedback">
                                 Valid.
-                            </div> -->
+                            </div>
                             <div class="invalid-feedback">
                                 Please fill out this field.
                             </div>
                             <div class="text-end">
                                 <input type="checkbox" onclick="mySignUp()"> Show Password
                             </div>
+                            <?php
+                            if(isset($_GET["error"])){
+                                echo("<p class=\"register-login-fail-warning\">Email already exists. Please try another email.</p?");
+                            }
+                            else if(isset($_GET["response"])){
+                                echo("<p class=\"register-login-fail-warning\">Please sign up as a mentor to accept invitation</p?");          
+                            }
+                            ?>
                         </div>
-                        <button class="btn btn-success btn-block w-100" type="submit">Sign Up</button>
+                        <button class="btn btn-success btn-block w-100" type="submit" name='signUpBtn' value='signUp'>Sign Up</button>
                         <hr>
-                    </form>
+                    </form>     
                 </div>
             </div>
 
