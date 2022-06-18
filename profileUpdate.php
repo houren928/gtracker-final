@@ -6,6 +6,11 @@
 include_once "include/config.php";
 include_once "include/m-session.php";
 
+// session_start();
+// if ((isset($_SESSION['userID']) && !empty($_SESSION['userID']))) {
+//     $id = $_SESSION['userID'];
+// };
+
 
 //fetching data in descending order (lastest entry first)
 //$result = mysql_query("SELECT * FROM users ORDER BY id DESC"); // mysql_query is deprecated
@@ -60,6 +65,17 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
         .bg-cus {
             background-color: #3a6ea5;
         }
+
+        .dropdown .dropdown-list .dropdown-header {
+            background-color:  #3a6ea5;
+            border: 1px solid  #3a6ea5;
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            color: #fff;
+        }
+        .bg-cus-light {
+            background-color: rgba(58, 110, 165,0.8);
+        }
     </style>
 
 </head>
@@ -78,7 +94,7 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                     <li class="nav-item"><a class="nav-link" href="dashboard.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link active" href="profileDummy.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="goals.php"><i class="fas fa-bullseye" style="color: rgba(255,255,255,0.42);"></i><span style="margin-left: 0px;">Goals</span></a><a class="nav-link" href="find-mentor-dashboard.php"><i class="fas fa-user-plus"></i><span>Find Mentor</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.php"><i class="far fa-user-circle"></i><span>Logout</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.php"><i class="far fa-user-circle"></i><span>Logout</span></a></li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                 </ul>
@@ -120,6 +136,10 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                             while ($row = mysqli_fetch_array($result)) {
                                                 $name = $row['user_email'];
                                                 $photo = $row['user_photo'];
+                                                if(empty($photo)){
+                                                    $photoSource = "assets/img/default_pp.png";
+                                                }
+                                                else{$photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';}
                                             }
                                             echo $name;
                                             ?>
@@ -127,7 +147,7 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
 
                                         <img class="border rounded-circle img-profile" src="
                                         <?php
-                                        echo 'data:image/jpeg;base64,' . base64_encode($photo) . '';
+                                        echo $photoSource;
                                         ?>
                                         " />
                                     </a>
@@ -142,13 +162,13 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                             <div class="card mb-3" style="min-height: 396px;">
                                 <?php if ($row = $result11->fetch_assoc()) {
                                     if (empty($row['user_photo'])) { ?>
-                                        <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="assets/img/2.jpg" width="160" height="160">
+                                        <div class="card-body text-center shadow"><img class="border rounded-circle mb-3 mt-4" src="assets/img/default_pp.png" width="160" height="160">
                                             <!-- <div class="gallery"> -->
                                         <?php } else { ?>
-                                            <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['user_photo']); ?>" width="160" height="160">
+                                            <div class="card-body text-center shadow"><img class="border rounded-circle mb-3 mt-4" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['user_photo']); ?>" width="160" height="160">
                                         <?php }
                                 } ?>
-                                        <!-- <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="assets/img/2.jpg" width="160" height="160">                                     -->
+                                        <!-- <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="assets/img/default_pp.png" width="160" height="160">                                     -->
                                         <form action="processDummy.php" method="post" enctype="multipart/form-data">
                                             <div class="mb-3"><label class="btn btn-primary btn-sm">Upload Photo<input type="file" name="image" onchange="document.getElementById('submit3').click()" hidden><?php if ($res = mysqli_fetch_array($resultSave1)) {
                                                                                                                                                                                                                     echo "<a href = \"profileUpdate.php?user_id=$res[user_id]\"></a>";

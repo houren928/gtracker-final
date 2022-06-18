@@ -30,18 +30,30 @@ include_once "include/m-session.php"
     <link rel="stylesheet" href="assets/css/Social-Icons.css">
     <link rel="stylesheet" href="assets/css/Testimonials.css">
     <link rel="stylesheet" href="assets/css/untitled.css">
-<style>
+    <style>
         .bg-cus {
             background-color: #3a6ea5;
         }
+
+        .dropdown .dropdown-list .dropdown-header {
+            background-color:  #3a6ea5;
+            border: 1px solid  #3a6ea5;
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            color: #fff;
+        }
+        .bg-cus-light {
+            background-color: rgba(58, 110, 165,0.8);
+        }
+        
     </style>
-    
+
 </head>
 
 <body id="page-top">
     <div id="wrapper">
 
-    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-cus p-0">
             <div class="container-fluid d-flex flex-column p-0">
                 <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
                     <div class="sidebar-brand-icon rotate-n-15"><img class="mb-3 mt-4" src="assets/img/logo.png" width="40" height="30" style="transform: rotate(16deg) skew(0deg);margin-right: -10px;"></div>
@@ -61,7 +73,7 @@ include_once "include/m-session.php"
         </nav>
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
-            <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                         <h6 class="text-nowrap text-black-50 mb-0">“Believe you can and you're halfway there.” — Theodore Roosevelt.</h6>
                         <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -94,6 +106,10 @@ include_once "include/m-session.php"
                                             while ($row = mysqli_fetch_array($result)) {
                                                 $name = $row['user_email'];
                                                 $photo = $row['user_photo'];
+                                                if(empty($photo)){
+                                                    $photoSource = "assets/img/default_pp.png";
+                                                }
+                                                else{$photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';}
                                             }
                                             echo $name;
                                             ?>
@@ -101,7 +117,7 @@ include_once "include/m-session.php"
 
                                         <img class="border rounded-circle img-profile" src="
                                         <?php
-                                        echo 'data:image/jpeg;base64,' . base64_encode($photo) . '';
+                                        echo $photoSource;
                                         ?>
                                         " />
                                     </a>

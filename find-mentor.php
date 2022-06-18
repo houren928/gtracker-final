@@ -33,6 +33,17 @@
         .bg-cus {
             background-color: #3a6ea5;
         }
+
+        .dropdown .dropdown-list .dropdown-header {
+            background-color:  #3a6ea5;
+            border: 1px solid  #3a6ea5;
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            color: #fff;
+        }
+        .bg-cus-light {
+            background-color: rgba(58, 110, 165,0.8);
+        }
     </style>
     
 </head>
@@ -48,11 +59,11 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href="dashboard.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="goals.html"><i class="fas fa-bullseye" style="color: rgba(255,255,255,0.42);"></i><span style="margin-left: 0px;">Goals</span></a></li> 
+                    <li class="nav-item"><a class="nav-link" href="dashboard.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="profileUpdate.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="goals.php"><i class="fas fa-bullseye" style="color: rgba(255,255,255,0.42);"></i><span style="margin-left: 0px;">Goals</span></a></li> 
                     <li class="nav-item"><a class="nav-link active" href="find-mentor-dashboard.php"><i class="fas fa-user-plus"></i><span>Find Mentor</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="far fa-user-circle"></i><span>Logout</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.php"><i class="far fa-user-circle"></i><span>Logout</span></a></li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                 </ul>

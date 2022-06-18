@@ -50,6 +50,17 @@ $menteeGoals = $dCtrl->index();
         .bg-cus {
             background-color: #3a6ea5;
         }
+
+        .dropdown .dropdown-list .dropdown-header {
+            background-color:  #3a6ea5;
+            border: 1px solid  #3a6ea5;
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            color: #fff;
+        }
+        .bg-cus-light {
+            background-color: rgba(58, 110, 165,0.8);
+        }
     </style>
 </head>
 
@@ -110,6 +121,10 @@ $menteeGoals = $dCtrl->index();
                                             while ($row = mysqli_fetch_array($result)) {
                                                 $name = $row['user_email'];
                                                 $photo = $row['user_photo'];
+                                                if(empty($photo)){
+                                                    $photoSource = "assets/img/default_pp.png";
+                                                }
+                                                else{$photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';}
                                             }
                                             echo $name;
                                             ?>
@@ -117,7 +132,7 @@ $menteeGoals = $dCtrl->index();
 
                                         <img class="border rounded-circle img-profile" src="
                                         <?php
-                                        echo 'data:image/jpeg;base64,' . base64_encode($photo) . '';
+                                        echo $photoSource;
                                         ?>
                                         " />
                                     </a>
@@ -247,7 +262,7 @@ $menteeGoals = $dCtrl->index();
                         <div class="col-auto col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6" id="two-chart">
                             <div class="card shadow mb-4">
                                 <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h6 class="text-primary fw-bold m-0">Overoll Goal Tracker</h6>
+                                    <h6 class="text-primary fw-bold m-0">Overall Goal Tracker</h6>
                                     <div class="dropdown no-arrow"><button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" disabled><i class="fas fa-ellipsis-v text-gray-100"></i></button>
                                         <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
                                             <p class="text-center dropdown-header">Other Chart Types</p>
@@ -275,7 +290,7 @@ $menteeGoals = $dCtrl->index();
                                         <div class="col"> <span class="text-start text-primary m-0 fw-bold ">Latest Goals</span>
                                         </div>
                                         <div class="col">
-                                            <div class="text-end btnalign"><button type="button" class="btn-sm btn-primary" onclick="document.location='ap-new-goal.php'">New Goal</button></div>
+                                            <div class="text-end btnalign"><button type="button" class="btn-sm btn-primary bg-cus" onclick="document.location='ap-new-goal.php'">New Goal</button></div>
                                         </div>
                                     </div>
 

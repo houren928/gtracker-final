@@ -2,9 +2,16 @@
 
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require 'vendor/autoload.php';
+
 if(isset($_POST["email"]) && (!empty($_POST["email"]))){
 $email = $_POST["email"];
 $usertype = $_GET['type'];
+
 $email = filter_var($email, FILTER_SANITIZE_EMAIL);
 $email = filter_var($email, FILTER_VALIDATE_EMAIL);
 if (!$email) {
@@ -28,7 +35,7 @@ if (!$email) {
      $output='<p>Dear user,</p>';
      $output.='<p>Please click on the following link to reset your password.</p>';
      $output.='<p>-------------------------------------------------------------</p>';
-     $output.='<p><a href="http://localhost/gtracker-lalala/error-change-password.php?key='.$key.'&type='.$usertype.'&email='.$email.'&action=reset" target="_blank">Set Your New Password</a></p>';		
+     $output.='<p><a href="http://localhost/project/gtracker-mentor-1.0/error-change-password.php?key='.$key.'&type='.$usertype.'&email='.$email.'&action=reset" target="_blank">Set Your New Password</a></p>';		
      $output.='<p>-------------------------------------------------------------</p>';
      $output.='<p>Please be sure to copy the entire link into your browser.
      The link will expire after 1 day for security reason.</p>';
@@ -40,15 +47,18 @@ if (!$email) {
      $body = $output; 
      $subject = "Password Recovery - GoulMou.com";
      $fromserver = "noreply@GoalTracker.com"; 
-     require_once "PHPMailer/PHPMailer.php";
-     require_once "PHPMailer/SMTP.php";
-     require_once "PHPMailer/Exception.php";
+     // require_once "PHPMailer/PHPMailer.php";
+     // require_once "PHPMailer/SMTP.php";
+     // require_once "PHPMailer/Exception.php";
      $mail = new PHPMailer();
+     $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+     $mail->isSMTP();
      $mail->Host = "smtp.gmail.com"; // Enter your host here
      $mail->SMTPAuth = true;
-     $mail->Username = "mouyuancheng2@gmail.com"; // Enter your email here
-     $mail->Password = "chengpeiyew1548"; //Enter your password here
-     $mail->Port = 465;
+     $mail->Username = "nickholes0928@gmail.com"; // Enter your email here
+     $mail->Password = "rnjokffdrhftefsr"; //Enter your password here
+     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
+     $mail->Port = 587;
      $mail->IsHTML(true);
      $mail->From = "noreply@yourwebsite.com";
      $mail->FromName = "GoulMou";

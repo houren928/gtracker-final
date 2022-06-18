@@ -31,18 +31,29 @@ include_once "include/m-session.php"
     <link rel="stylesheet" href="assets/css/Testimonials.css">
     <link rel="stylesheet" href="assets/css/untitled.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-<style>
+    <style>
         .bg-cus {
             background-color: #3a6ea5;
         }
+
+        .dropdown .dropdown-list .dropdown-header {
+            background-color:  #3a6ea5;
+            border: 1px solid  #3a6ea5;
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            color: #fff;
+        }
+        .bg-cus-light {
+            background-color: rgba(58, 110, 165,0.8);
+        }
     </style>
-    
+
 </head>
 
 <body id="page-top">
     <div id="wrapper">
 
-    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-cus p-0">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-cus p-0">
             <div class="container-fluid d-flex flex-column p-0">
                 <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
                     <div class="sidebar-brand-icon rotate-n-15"><img class="mb-3 mt-4" src="assets/img/logo.png" width="40" height="30" style="transform: rotate(16deg) skew(0deg);margin-right: -10px;"></div>
@@ -62,7 +73,7 @@ include_once "include/m-session.php"
         </nav>
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
-            <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                         <h6 class="text-nowrap text-black-50 mb-0">“Believe you can and you're halfway there.” — Theodore Roosevelt.</h6>
                         <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -95,6 +106,10 @@ include_once "include/m-session.php"
                                             while ($row = mysqli_fetch_array($result)) {
                                                 $name = $row['user_email'];
                                                 $photo = $row['user_photo'];
+                                                if(empty($photo)){
+                                                    $photoSource = "assets/img/default_pp.png";
+                                                }
+                                                else{$photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';}
                                             }
                                             echo $name;
                                             ?>
@@ -102,7 +117,7 @@ include_once "include/m-session.php"
 
                                         <img class="border rounded-circle img-profile" src="
                                         <?php
-                                        echo 'data:image/jpeg;base64,' . base64_encode($photo) . '';
+                                        echo $photoSource;
                                         ?>
                                         " />
                                     </a>
@@ -263,13 +278,13 @@ include_once "include/m-session.php"
                                     <?php
                                     include_once "include/config.php"; // Always include the database oconnection before accessing the database
                                     $goalID = $_GET['goal-id'];
-                                    $sql = "SELECT count(activity_id) FROM activity WHERE activity_completion_flag = 1 AND goal_id = $goalID";
+                                    $sql = "SELECT count(activity_id) FROM `activity` WHERE activity_completion_flag = 1 AND goal_id = $goalID";
                                     $result = mysqli_query($conn, $sql);
                                     $row = mysqli_fetch_array($result);
                                     // while ($row = mysqli_fetch_array($result)) {
                                     $completedCount = $row[0];
                                     // };
-                                    $sql = "SELECT count(activity_id) FROM activity WHERE activity_completion_flag = 0 AND goal_id = $goalID";
+                                    $sql = "SELECT count(activity_id) FROM `activity` WHERE activity_completion_flag = 0 AND goal_id = $goalID";
                                     $result = mysqli_query($conn, $sql);
                                     $row = mysqli_fetch_array($result);
                                     // while ($row = mysqli_fetch_array($result)) {
@@ -406,12 +421,12 @@ include_once "include/m-session.php"
                 </div>
             </div>
             <section class="highlight-clean">
-                <?php 
+                <?php
                 echo '<div class="buttons"><a class="btn btn-primary" role="button" href="ap-edit-goal.php?goal-id=';
                 echo $goalID;
-                echo '">Edit Goal</a><a class="btn btn-danger" role="button" href="ap-goal-remove-script.php?goal-id='; 
+                echo '">Edit Goal</a><a class="btn btn-danger" role="button" href="ap-goal-remove-script.php?goal-id=';
                 echo $goalID;
-                echo'" style="background: var(--bs-red);">DELETE GOAL</a></div>';
+                echo '" style="background: var(--bs-red);">DELETE GOAL</a></div>';
                 ?>
             </section>
             <footer class="bg-white sticky-footer">

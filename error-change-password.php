@@ -12,7 +12,7 @@ if (isset($_GET["key"]) && isset($_GET["email"]) && isset($_GET["type"]) && isse
 <p>The link is invalid/expired. Either you did not copy the correct link
 from the email, or you have already used the key in which case it is 
 deactivated.</p>
-<p><a href="http://localhost/gtracker-lalala/reset-password.php?type='.$usertype.'">
+<p><a href="http://localhost/project/gtracker-mentor-1.0/reset-password.php?type='.$usertype.'">
 Click here</a> to reset password.</p>';
 	}else{
   $row = mysqli_fetch_assoc($result);

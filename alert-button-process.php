@@ -69,7 +69,7 @@ else{
         
 
         echo '<div class="me-3">';
-        echo '<div class="bg-primary icon-circle"><i class="fas fa-file-alt text-white"></i></div>';
+        echo '<div class="bg-cus-light icon-circle"><i class="fas fa-bell text-white"></i></div>';
         echo '</div>';
         echo '<div><span class="small text-gray-500">';
         echo $activityName;

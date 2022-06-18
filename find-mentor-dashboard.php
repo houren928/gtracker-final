@@ -43,6 +43,17 @@ $mentors = $dCtrl->index();
         .bg-cus {
             background-color: #3a6ea5;
         }
+
+        .dropdown .dropdown-list .dropdown-header {
+            background-color:  #3a6ea5;
+            border: 1px solid  #3a6ea5;
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            color: #fff;
+        }
+        .bg-cus-light {
+            background-color: rgba(58, 110, 165,0.8);
+        }
     </style>
 
 </head>
@@ -103,6 +114,10 @@ $mentors = $dCtrl->index();
                                             while ($row = mysqli_fetch_array($result)) {
                                                 $name = $row['user_email'];
                                                 $photo = $row['user_photo'];
+                                                if(empty($photo)){
+                                                    $photoSource = "assets/img/default_pp.png";
+                                                }
+                                                else{$photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';}
                                             }
                                             echo $name;
                                             ?>
@@ -110,7 +125,7 @@ $mentors = $dCtrl->index();
 
                                         <img class="border rounded-circle img-profile" src="
                                         <?php
-                                        echo 'data:image/jpeg;base64,' . base64_encode($photo) . '';
+                                        echo $photoSource;
                                         ?>
                                         " />
                                     </a>
@@ -128,7 +143,7 @@ $mentors = $dCtrl->index();
                             <div class="container mt-5">
                                 <div class="row">
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-12 m-auto">
-                                        <table class="table table-bordered table-hovered" id="dataTable">
+                                        <table class="table table-hovered" id="dataTable">
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>

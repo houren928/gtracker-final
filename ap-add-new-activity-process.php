@@ -15,8 +15,7 @@ if (isset($_POST)) {
     $location = $_POST["ap-activity-location"];
 
     try {
-        $menteeID = $_SESSION['menteeID'];
-        $sql = "INSERT INTO activity(activity_name,activity_description,activity_completion_date,activity_time,activity_location,mentee_id,goal_id) VALUES ('$name','$description','$date','$time','$location',$menteeID,'$goalID')";
+        $sql = "INSERT INTO activity(activity_name,activity_description,activity_completion_date,activity_time,activity_location,mentee_id,goal_id) VALUES ('$name','$description','$date','$time','$location','$roleID','$goalID')";
         $result = mysqli_query($conn, $sql);
         mysqli_close($conn);
         header("Location:check-goal-progress.php?goal-id=$goalID&page-id=aanap");

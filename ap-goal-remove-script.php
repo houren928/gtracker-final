@@ -14,6 +14,14 @@ try {
     // $row = mysqli_fetch_array($result);
     while ($row = mysqli_fetch_array($result)) {
         $activityID = $row['activity_id'];
+        $sql3 = "SELECT * FROM alert WHERE activity_id = $activityID";
+        $result3 = mysqli_query($conn, $sql3);
+        // $row = mysqli_fetch_array($result);
+        while ($row = mysqli_fetch_array($result3)) {
+            $alertID = $row['alert_id'];
+            $sql4 = "DELETE FROM alert WHERE alert_id = $alertID;";
+            $result4 = mysqli_query($conn, $sql4);
+        };
         $sql2 = "DELETE FROM activity WHERE activity_id = $activityID;";
         $result2 = mysqli_query($conn, $sql2);
     };

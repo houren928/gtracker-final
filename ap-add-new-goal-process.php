@@ -21,8 +21,8 @@ if(isset($_POST)){
         // $tempResult = mysqli_query($conn, $sql);
         // $row = mysqli_fetch_assoc($tempResult);
         // $menteeId = $row["mentee_id"];
-        $menteeID = $_SESSION['menteeID'];
-        $sql = "INSERT INTO goal(goal_title,goal_description,goal_specific,goal_measurable,goal_achievable,goal_realistic,goal_start_date, goal_completion_date, mentee_id) VALUES ('$title','$description','$ap_specific','$measurable','$achievable','$realistic','$starting_date','$target_completion_date', $menteeID)";
+
+        $sql = "INSERT INTO goal(goal_title,goal_description,goal_specific,goal_measurable,goal_achievable,goal_realistic,goal_start_date, goal_completion_date, mentee_id) VALUES ('$title','$description','$ap_specific','$measurable','$achievable','$realistic','$starting_date','$target_completion_date','$roleID')";
         $result = mysqli_query($conn,$sql);
         // $sql2 = "SELECT * FROM `goal`";
         // // mysqli_close($conn);

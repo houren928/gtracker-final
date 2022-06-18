@@ -62,6 +62,17 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
         .bg-cus {
             background-color: #3a6ea5;
         }
+
+        .dropdown .dropdown-list .dropdown-header {
+            background-color:  #3a6ea5;
+            border: 1px solid  #3a6ea5;
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            color: #fff;
+        }
+        .bg-cus-light {
+            background-color: rgba(58, 110, 165,0.8);
+        }
     </style>
 
 </head>
@@ -122,6 +133,10 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                             while ($row = mysqli_fetch_array($result)) {
                                                 $name = $row['user_email'];
                                                 $photo = $row['user_photo'];
+                                                if(empty($photo)){
+                                                    $photoSource = "assets/img/default_pp.png";
+                                                }
+                                                else{$photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';}
                                             }
                                             echo $name;
                                             ?>
@@ -129,7 +144,7 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
 
                                         <img class="border rounded-circle img-profile" src="
                                         <?php
-                                        echo 'data:image/jpeg;base64,' . base64_encode($photo) . '';
+                                        echo $photoSource;
                                         ?>
                                         " />
                                     </a>
@@ -142,7 +157,7 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                     <div class="row mb-3">
                         <div class="col-lg-4 d-xl-inline align-self-center">
                             <div class="card mb-3" style="min-height: 396px;">
-                                <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="assets/img/2.jpg" width="160" height="160">
+                                <div class="card-body text-center shadow"><img class="border rounded-circle mb-3 mt-4" src="assets/img/default_pp.png" width="160" height="160">
                                     <form action="processDummy.php" method="post" enctype="multipart/form-data">
                                         <div class="mb-3"><label class="btn btn-primary btn-sm">Upload Photo<input type="file" name="image" onchange="document.getElementById('submit3').click()" hidden><input type="submit" id="submit3" name="submit3" hidden></label></div>
                                     </form>

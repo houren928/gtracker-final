@@ -142,10 +142,10 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                             <div class="card mb-3" style="min-height: 396px;">
                                 <?php if ($row = $result11->fetch_assoc()) {
                                     if (empty($row['user_photo'])) { ?>
-                                        <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="assets/img/2.jpg" width="160" height="160">
+                                        <div class="card-body text-center shadow"><img class="border rounded-circle mb-3 mt-4" src="assets/img/2.jpg" width="160" height="160">
                                             <!-- <div class="gallery"> -->
                                         <?php } else { ?>
-                                            <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['user_photo']); ?>" width="160" height="160">
+                                            <div class="card-body text-center shadow"><img class="border rounded-circle mb-3 mt-4" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['user_photo']); ?>" width="160" height="160">
                                         <?php }
                                 } ?>
                                         <!-- <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="assets/img/2.jpg" width="160" height="160">                                     -->

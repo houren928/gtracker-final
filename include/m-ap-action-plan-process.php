@@ -73,6 +73,7 @@ try {
         '       </div>'.
         '   </div>';
     }
+    
     echo '</div>';
     mysqli_close($conn);
 } catch (mysqli_sql_exception $e) {

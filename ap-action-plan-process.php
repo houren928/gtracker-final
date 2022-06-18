@@ -54,41 +54,94 @@ try {
             }
         }
     }
-    foreach($pendingArray as $row) {
-        print '<div class="col-md-6 col-lg-4 text-success item" style="cursor: pointer;" onclick="window.location=\' ' .
-                'ap-action-plan-slider.php?goal-id=' //Need to be replaced with target web link
-                . $goalID
-                .'&activity-id='
-                . $row['activity_id']
-                . '\';" >' .
-                '                                        <div class="acbox" style="background: var(--bs-light);">' .
-                '                                            <p class="description"> ' . $row["activity_description"] . '</p>' .
-                '                                        </div>' .
-                '                                        <div class="author">' .
-                '                                            <h5 class="name text-warning">' . $row["activity_name"] . '</h5>' .
-                '                                            <p class="title">Ends in 10 days.</p>' .
-                '                                        </div>' .
-                '                                    </div>';
-    }
-    // $flag = 0;
-    foreach($completedArray as $row) {
-        print '<div class="col-md-6 col-lg-4 text-success item" style="cursor: pointer;" onclick="window.location=\' ' .
-                    'ap-action-plan-slider.php?goal-id=' //Need to be replaced with target web link
-                    . $goalID
-                    .'&activity-id='
-                    . $row['activity_id']
-                    . '\';" >' .
-                    '                                        <div class="acbox" style="background: var(--bs-light);">' .
-                    '                                            <p class="description"> ' . $row["activity_description"] . '</p>' .
-                    '                                        </div>' .
-                    '                                        <div class="author">' .
-                    '                                            <h5 class="name">' . $row["activity_name"] . '</h5>' .
-                    '                                            <p class="title">Ends in 10 days.</p>' .
-                    '                                        </div>' .
-                    '                                    </div>';
-    }
+    // foreach ($pendingArray as $row) {
+    //     print '<div class="col-md-6 col-lg-4 text-success item" style="cursor: pointer;" onclick="window.location=\' ' .
+    //         '/Project/gtracker-mentor-1.0/ap-action-plan-slider.php?goal-id=' //Need to be replaced with target web link
+    //         . $goalID
+    //         . '&activity-id='
+    //         . $row['activity_id']
+    //         . '\';" >' .
+    //         '                                        <div class="acbox" style="background: var(--bs-light);">' .
+    //         '                                            <p class="description"> ' . $row["activity_description"] . '</p>' .
+    //         '                                        </div>' .
+    //         '                                        <div class="author">' .
+    //         '                                            <h5 class="name text-warning">' . $row["activity_name"] . '</h5>' .
+    //         '                                            <p class="title">Ends in 10 days.</p>' .
+    //         '                                        </div>' .
+    //         '                                    </div>';
+    // }
+    // // $flag = 0;
+    // foreach ($completedArray as $row) {
+    //     print '<div class="col-md-6 col-lg-4 text-success item" style="cursor: pointer;" onclick="window.location=\' ' .
+    //         '/Project/gtracker-mentor-1.0/ap-action-plan-slider.php?goal-id=' //Need to be replaced with target web link
+    //         . $goalID
+    //         . '&activity-id='
+    //         . $row['activity_id']
+    //         . '\';" >' .
+    //         '                                        <div class="acbox" style="background: var(--bs-light);">' .
+    //         '                                            <p class="description"> ' . $row["activity_description"] . '</p>' .
+    //         '                                        </div>' .
+    //         '                                        <div class="author">' .
+    //         '                                            <h5 class="name">' . $row["activity_name"] . '</h5>' .
+    //         '                                            <p class="title">Ends in 10 days.</p>' .
+    //         '                                        </div>' .
+    //         '                                    </div>';
+    // }
 
-
+    foreach ($pendingArray as $row) {
+        $today_date = date('Y-m-d');
+        $from_date = strtotime(date($today_date)); //Convert the start date to second
+        $to_date = strtotime($row['activity_completion_date']); // Convert the end date to second
+        $timeBound = (int)(($to_date - $from_date) / (60 * 60 * 24)); // Convert the time bound to day and check whether it exceeds the time limit or not
+        if ($timeBound < 0) {
+            $paragraph = '<p class="title">Already expires ' . ($timeBound * -1) . ' days ago.</p>';
+        } else {
+            $paragraph = '<p class="title">Ends in ' . $timeBound . ' days.</p>';
+        }
+        print '<div class="col-md-6 col-lg-4 text-success item" style="cursor: pointer;" onclick="window.location=\' ' .
+            '/Project/gtracker-mentor-1.0/ap-action-plan-slider.php?goal-id=' //Need to be replaced with target web link
+            . $goalID
+            . '&activity-id='
+            . $row['activity_id']
+            . '\';" >' .
+            '       <div class="acbox" style="background: var(--bs-light);">' .
+            '           <p class="description"> ' . $row["activity_description"] . '</p>' .
+            '       </div>' .
+            '       <div class="author">';
+        if ($timeBound < 0) {
+            print '            <h5 class="name text-danger">' . $row["activity_name"] . '</h5>';
+        } else {
+            print '            <h5 class="name text-warning">' . $row["activity_name"] . '</h5>';
+        }
+        print $paragraph .
+            '       </div>' .
+            '   </div>';
+    }
+    foreach ($completedArray as $row) {
+        $today_date = date('Y-m-d');
+        $from_date = strtotime(date($today_date)); //Convert the start date to second
+        $to_date = strtotime($row['activity_completion_date']); // Convert the end date to second
+        $timeBound = (int)(($to_date - $from_date) / (60 * 60 * 24)); // Convert the time bound to day and check whether it exceeds the time limit or not
+        if ($timeBound < 0) {
+            $paragraph = '<p class="title">Already expires ' . ($timeBound * -1) . ' days ago.</p>';
+        } else {
+            $paragraph = '<p class="title">Ends in ' . $timeBound . ' days.</p>';
+        }
+        print '<div class="col-md-6 col-lg-4 text-success item" style="cursor: pointer;" onclick="window.location=\' ' .
+            '/Project/gtracker-mentor-1.0/ap-action-plan-slider.php?goal-id=' //Need to be replaced with target web link
+            . $goalID
+            . '&activity-id='
+            . $row['activity_id']
+            . '\';" >' .
+            '       <div class="acbox" style="background: var(--bs-light);">' .
+            '           <p class="description"> ' . $row["activity_description"] . '</p>' .
+            '       </div>' .
+            '       <div class="author">' .
+            '            <h5 class="name text-success">' . $row["activity_name"] . '</h5>' .
+            $paragraph .
+            '       </div>' .
+            '   </div>';
+    }
 
     echo '</div>';
 
