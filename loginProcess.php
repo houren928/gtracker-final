@@ -1,7 +1,7 @@
 <?php 
 include_once "include/config.php"; // Always include the database oconnection before accessing the database
 ?>
-
+ 
 <?php
 // The submit button in the form is clicked and the data is passed to this form
 if(isset($_POST['loginBtn'])){

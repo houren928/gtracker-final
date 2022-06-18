@@ -5,7 +5,16 @@ if ($mentors != null) {
     foreach ($mentors as $mentor) :
 ?>
         <tr id="<?php echo $mentor['user_id']; ?>">
-            <td><img class="rounded-circle me-2" width="30" height="30" src="<?php echo 'data:image/jpeg;base64,' . base64_encode($mentor['user_photo']) . ''; ?>"><?php echo $mentor['user_username']; ?></a></td>
+            <td>
+                <img class="rounded-circle me-2" width="30" height="30" src="<?php
+                                                                                if (empty($mentor['user_photo'])) {
+                                                                                    $photoSource = "assets/img/default_pp.png";
+                                                                                } else {
+                                                                                    $photoSource = 'data:image/jpeg;base64,' . base64_encode($mentor['user_photo']) . '';
+                                                                                }
+                                                                                echo $photoSource ?>">
+                <?php echo $mentor['user_username']; ?></a>
+            </td>
             <td><?php echo $mentor['user_country']; ?></td>
             <td><?php echo $mentor['user_email']; ?></td>
             <td><?php echo $mentor['user_birthdate']; ?></td>

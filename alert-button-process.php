@@ -12,7 +12,7 @@ try {
     $reversedArray = array();
 
     $flag = 0;
-    
+
     while ($row = mysqli_fetch_array($result)) {
         // echo '<a class="dropdown-item d-flex align-items-center" href="">';
         // echo '<div class="me-3">';
@@ -36,21 +36,27 @@ try {
         //     break;
         // }
         // $flag ++;
-        array_push($reversedArray,$row);
+        $today = date("Y-m-d H:i:s");
+        $date = $row['alert_date'] . " " . $row['alert_time'];
+        if ($date <= $today) {
+            // if (time() >= strtotime($row['alert_time'])) {
+            array_push($reversedArray, $row);
+            // }
+        }
     }
-    if(count($reversedArray) > 0){
-    echo '<div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter">'; 
-    echo count($reversedArray);
-    echo '</span><i class="fas fa-bell fa-fw"></i></a>';
-    echo '<div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">';}
-else{
-    echo '<div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">'; 
-    echo '<i class="fas fa-bell fa-fw"></i></a>';
-    echo '<div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">';
-}
+    if (count($reversedArray) > 0) {
+        echo '<div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter">';
+        echo count($reversedArray);
+        echo '</span><i class="fas fa-bell fa-fw"></i></a>';
+        echo '<div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">';
+    } else {
+        echo '<div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#">';
+        echo '<i class="fas fa-bell fa-fw"></i></a>';
+        echo '<div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">';
+    }
 
     echo '<h6 class="dropdown-header">reminders center</h6>';
-    
+
     while ($row = array_pop($reversedArray)) {
         $activityID = $row['activity_id'];
         $sql2 = "SELECT * FROM `activity` WHERE activity_id = $activityID";
@@ -59,30 +65,36 @@ else{
             $activityName = $row2['activity_name'];
             $goalID = $row2['goal_id'];
         }
-        echo '<a class="dropdown-item d-flex align-items-center" href="alert-linking-process.php?goal-id=';
-        echo $goalID;
-        echo '&activity-id=';
-        echo $activityID;
-        echo '&alert-id=';
-        echo $row['alert_id'];
-        echo '">';
-        
+        // $ThatTime = "14:08:10";
+        $today = date("Y-m-d H:i:s");
+        $date = $row['alert_date'] . " " . $row['alert_time'];
 
-        echo '<div class="me-3">';
-        echo '<div class="bg-cus-light icon-circle"><i class="fas fa-bell text-white"></i></div>';
-        echo '</div>';
-        echo '<div><span class="small text-gray-500">';
-        echo $activityName;
-        echo '</span>';
-        echo '<p>';
-        echo $row['alert_notes'];
-        echo '</p>';
-        echo '</div>';
-        echo '</a>';
-        if($flag >= 2){
-            break;
+        if ($date <= $today) {
+            echo '<a class="dropdown-item d-flex align-items-center" href="alert-linking-process.php?goal-id=';
+            echo $goalID;
+            echo '&activity-id=';
+            echo $activityID;
+            echo '&alert-id=';
+            echo $row['alert_id'];
+            echo '">';
+
+
+            echo '<div class="me-3">';
+            echo '<div class="bg-cus-light icon-circle"><i class="fas fa-bell text-white"></i></div>';
+            echo '</div>';
+            echo '<div><span class="small text-gray-500">';
+            echo $activityName;
+            echo '</span>';
+            echo '<p>';
+            echo $row['alert_notes'];
+            echo '</p>';
+            echo '</div>';
+            echo '</a>';
+            if ($flag >= 2) {
+                break;
+            }
+            $flag++;
         }
-        $flag ++;
     }
     // echo '<a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>';
     echo '<div class="dropdown-item text-center small text-gray-500" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Show All Reminders</div>';

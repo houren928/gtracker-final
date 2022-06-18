@@ -213,7 +213,7 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                             </div>
                                             <div class="row">
                                                 <div class="col">
-                                                    <div class="mb-3"><label class="form-label" for="first_name"><strong>Age</strong></label><input class="form-control" type="text" id="age" placeholder="32" name="age" value="<?php
+                                                    <div class="mb-3"><label class="form-label" for="first_name"><strong>Age</strong></label><input class="form-control" type="number" id="age" placeholder="32" name="age" value="<?php
                                                                                                                                                                                                                                     if ($res = mysqli_fetch_array($result5)) {
                                                                                                                                                                                                                                         echo $res['user_birthdate'];
                                                                                                                                                                                                                                     }

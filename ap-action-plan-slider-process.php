@@ -18,7 +18,9 @@ try {
 
     $flag = 0;
     // echo '<div class="row people" style="padding-bottom: 1px;">';
-    while ($row = mysqli_fetch_array($result)) {
+    while (
+        $row = mysqli_fetch_array($result)
+    ) {
         echo '<div class="swiper-slide">';
         echo '<div class="acbox" style="background: var(--bs-light);">';
         echo '<section class="newsletter-subscribe" style="margin-top: 25px;padding-top: 25px;">';
@@ -30,11 +32,19 @@ try {
         echo '<p class="text-center mb-2">"&nbsp;';
         echo $row["activity_description"];
         echo '"</p>';
-        echo '<div class = "text-center"><a href = "ap-reminder.php?goal-id='; 
-        echo $goalID;
-        echo '&activity-id=';
-        echo $row["activity_id"];
-        echo '"><i class="bi bi-bell"></i></a></div>';
+        if ($row["activity_completion_flag"] == 1) {
+            echo '<div class = "text-center">';
+            // echo $goalID;
+            // echo '&activity-id=';
+            // echo $row["activity_id"];
+            echo '<i class="bi bi-bell-slash"></i></a></div>';
+        } else {
+            echo '<div class = "text-center"><a href = "ap-reminder.php?goal-id=';
+            echo $goalID;
+            echo '&activity-id=';
+            echo $row["activity_id"];
+            echo '"><i class="bi bi-bell"></i></a></div>';
+        }
         echo '<p class="text-center mt-4" style="margin-top: 50px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-clock">';
         echo '<path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"></path>';
         echo '<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"></path>';
@@ -60,21 +70,44 @@ try {
         echo '</div>';
         echo '<section class="highlight-clean" style="padding-top: 0px;">';
         echo '<div class="container">';
-        echo '<div class="buttons"><a class="btn btn-primary" role="button" href="ap-edit-activity.php?goal-id=';
-        echo $goalID;
-        echo '&activity-id=';
-        echo $row["activity_id"];
-        echo '" style="background: var(--bs-primary);">Edit</a><a class="btn btn-light" role="button" href="ap-activity-completed-script.php?goal-id=';
-        echo $goalID;
-        echo '&activity-id=';
-        echo $row["activity_id"];
-        echo '" style="background: var(--bs-green);">completed</a>';
-        echo '<a class="btn btn-light" role="button" href="ap-activity-remove-script.php?goal-id=';
-        echo $goalID;
-        echo '&activity-id=';
-        echo $row["activity_id"];
-        echo '" style="background: var(--bs-red);">remove</a>';
-        echo '</div>';
+        if ($row["activity_completion_flag"] == 1) {
+            echo '<div class="buttons">';
+            // echo '<button class="btn btn-primary" role="button" disabled href="ap-edit-activity.php?goal-id=';
+            // echo $goalID;
+            // echo '&activity-id=';
+            // echo $row["activity_id"];
+            // echo '" style="background: var(--bs-primary);">Edit</button>';
+            // echo '<button class="btn btn-light text-gray-600" disabled role="button" href="ap-activity-completed-script.php?goal-id=';
+            // echo $goalID;
+            // echo '&activity-id=';
+            // echo $row["activity_id"];
+            // echo '" style="background: #a5f0cd;">Done</button>';
+
+            echo '<h5><span class="badge bg-success">Done</span></h5>';
+
+            // echo '<button class="btn btn-light" role="button" disabled href="ap-activity-remove-script.php?goal-id=';
+            // echo $goalID;
+            // echo '&activity-id=';
+            // echo $row["activity_id"];
+            // echo '" style="background: var(--bs-red);">remove</button>';
+            echo '</div>';
+        } else {
+            echo '<div class="buttons"><a class="btn btn-primary" role="button" href="ap-edit-activity.php?goal-id=';
+            echo $goalID;
+            echo '&activity-id=';
+            echo $row["activity_id"];
+            echo '" style="background: var(--bs-primary);">Edit</a><a class="btn btn-light" role="button" href="ap-activity-completed-script.php?goal-id=';
+            echo $goalID;
+            echo '&activity-id=';
+            echo $row["activity_id"];
+            echo '" style="background: var(--bs-green);">completed</a>';
+            echo '<a class="btn btn-light" role="button" href="ap-activity-remove-script.php?goal-id=';
+            echo $goalID;
+            echo '&activity-id=';
+            echo $row["activity_id"];
+            echo '" style="background: var(--bs-red);">remove</a>';
+            echo '</div>';
+        }
         echo '</div>';
         echo '</section>';
         echo '<div class="author"></div>';

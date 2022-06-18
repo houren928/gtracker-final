@@ -44,7 +44,7 @@ if ($mail_to) {
             //  require_once "PHPMailer/SMTP.php";
             //  require_once "PHPMailer/Exception.php";
             $mail = new PHPMailer();
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+            // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
             $mail->isSMTP();
             $mail->Host = "smtp.gmail.com"; // Enter your host here
             $mail->SMTPAuth = true;

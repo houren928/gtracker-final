@@ -282,7 +282,7 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                             </div>
                                             <div class="card-body">
                                                 <form method="POST" action="processDummy.php">
-                                                    <div class="mb-3"><label class="form-label" for="contact"><strong>Contact Number</strong></label><input class="form-control" type="text" id="contact" placeholder="+60184724920" name="contact" required value="<?php
+                                                    <div class="mb-3"><label class="form-label" for="contact"><strong>Contact Number</strong></label><input class="form-control" type="number" id="contact" placeholder="+60184724920" name="contact" required value="<?php
                                                                                                                                                                                                                                                                     if ($res = mysqli_fetch_array($result7)) {
                                                                                                                                                                                                                                                                         echo $res['user_contact_num'];
                                                                                                                                                                                                                                                                     }

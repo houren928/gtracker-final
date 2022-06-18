@@ -13,6 +13,14 @@ try {
     SET activity_completion_flag = 1
     WHERE activity_id = $activityID;";
     $result = mysqli_query($conn,$sql);
+    $sql2 = "SELECT * FROM alert WHERE activity_id = $activityID";
+    $result2 = mysqli_query($conn, $sql2);
+    // $row = mysqli_fetch_array($result);
+    while ($row = mysqli_fetch_array($result2)) {
+        $alertID = $row['alert_id'];
+        $sql3 = "DELETE FROM alert WHERE alert_id = $alertID;";
+        $result3 = mysqli_query($conn, $sql3);
+    };
     mysqli_close($conn);
     header("Location:check-goal-progress.php?goal-id=$goalID&page-id=aap");
     // header("Location:ap-action-plan.php?goal-id=$goalID");

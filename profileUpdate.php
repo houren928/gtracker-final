@@ -192,7 +192,11 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                                 <div class="mb-6"><label class=""><strong>Username</strong></label></div>
                                                 <?php
                                                 if ($res = mysqli_fetch_array($result1)) {
-                                                    echo $res['user_username'];
+                                                    if (empty($res['user_username'])) {
+                                                        echo '-';
+                                                    } else {
+                                                        echo $res['user_username'];
+                                                    }
                                                 }
                                                 ?>
                                             </div>
@@ -211,7 +215,11 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                                 <div class="mb-6"><label class=""><strong>First Name</strong></label></div>
                                                 <?php
                                                 if ($res = mysqli_fetch_array($result3)) {
-                                                    echo $res['user_fname'];
+                                                    if (empty($res['user_fname'])) {
+                                                        echo '-';
+                                                    } else {
+                                                        echo $res['user_fname'];
+                                                    }
                                                 }
                                                 ?>
                                             </div>
@@ -219,7 +227,11 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                                 <div class="mb-6"><label class=""><strong>Last Name</strong></label></div>
                                                 <?php
                                                 if ($res = mysqli_fetch_array($result4)) {
-                                                    echo $res['user_lname'];
+                                                    if (empty($res['user_lname'])) {
+                                                        echo '-';
+                                                    } else {
+                                                        echo $res['user_lname'];
+                                                    }
                                                 }
                                                 ?>
                                             </div>
@@ -230,7 +242,11 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                                 <div class="mb-6"><label class=""><strong>Age</strong></label></div>
                                                 <?php
                                                 if ($res = mysqli_fetch_array($result5)) {
-                                                    echo $res['user_birthdate'];
+                                                    if (empty($res['user_birthdate'])) {
+                                                        echo '-';
+                                                    } else {
+                                                        echo $res['user_birthdate'];
+                                                    }
                                                 }
                                                 ?>
                                             </div>
@@ -238,7 +254,11 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                                 <div class="mb-6"><label class=""><strong>Gender</strong></label></div>
                                                 <?php
                                                 if ($res = mysqli_fetch_array($result6)) {
-                                                    echo $res['user_gender'];
+                                                    if (empty($res['user_gender'])) {
+                                                        echo '-';
+                                                    } else {
+                                                        echo $res['user_gender'];
+                                                    }
                                                 }
                                                 // mysqli_close($conn);
                                                 ?>

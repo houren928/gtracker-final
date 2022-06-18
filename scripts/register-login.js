@@ -1,5 +1,5 @@
-function myLogIn() {
-    var x = document.getElementById("mySignUpPassword");
+function myFunction() {
+    var x = document.getElementById("myLogInPassword");
     if (x.type === "password") {
         x.type = "text";
     } else {

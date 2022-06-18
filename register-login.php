@@ -65,7 +65,7 @@ include_once "include/config.php"; // Always include the database oconnection be
                             Please fill out this field.
                             </div>
                             <div class="text-end">
-                                <input type="checkbox" onclick="myLogIn()"> Show Password
+                                <input type="checkbox" onclick="myFunction()"> Show Password
                             </div>
                             <?php
                                  if(isset($_GET['error'])){
@@ -98,7 +98,7 @@ include_once "include/config.php"; // Always include the database oconnection be
 
         </div>
 
-        <!-- <script>
+        <script>
             function myFunction() {
                 var x = document.getElementById("myLogInPassword");
                 if (x.type === "password") {
@@ -107,7 +107,7 @@ include_once "include/config.php"; // Always include the database oconnection be
                     x.type = "password";
                 }
             }
-        </script> -->
+        </script>
 
     </div>
 

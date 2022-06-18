@@ -1,5 +1,5 @@
-<?php include_once "include/config.php";?>
-<?php include_once "include/m-session.php";?>
+<?php include_once "include/config.php"; ?>
+<?php include_once "include/m-session.php"; ?>
 
 <!DOCTYPE html>
 <html>
@@ -29,23 +29,24 @@
     <link rel="stylesheet" href="assets/css/Social-Icons.css">
     <link rel="stylesheet" href="assets/css/Testimonials.css">
     <link rel="stylesheet" href="assets/css/untitled.css">
-<style>
+    <style>
         .bg-cus {
             background-color: #3a6ea5;
         }
 
         .dropdown .dropdown-list .dropdown-header {
-            background-color:  #3a6ea5;
-            border: 1px solid  #3a6ea5;
+            background-color: #3a6ea5;
+            border: 1px solid #3a6ea5;
             padding-top: .75rem;
             padding-bottom: .75rem;
             color: #fff;
         }
+
         .bg-cus-light {
-            background-color: rgba(58, 110, 165,0.8);
+            background-color: rgba(58, 110, 165, 0.8);
         }
     </style>
-    
+
 </head>
 
 <body id="page-top">
@@ -61,7 +62,7 @@
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item"><a class="nav-link" href="dashboard.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="profileUpdate.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="goals.php"><i class="fas fa-bullseye" style="color: rgba(255,255,255,0.42);"></i><span style="margin-left: 0px;">Goals</span></a></li> 
+                    <li class="nav-item"><a class="nav-link" href="goals.php"><i class="fas fa-bullseye" style="color: rgba(255,255,255,0.42);"></i><span style="margin-left: 0px;">Goals</span></a></li>
                     <li class="nav-item"><a class="nav-link active" href="find-mentor-dashboard.php"><i class="fas fa-user-plus"></i><span>Find Mentor</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="index.php"><i class="far fa-user-circle"></i><span>Logout</span></a></li>
                     <li class="nav-item"></li>
@@ -89,85 +90,41 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown no-arrow mx-1">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter">3+</span><i class="fas fa-bell fa-fw"></i></a>
-                                    <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
-                                        <h6 class="dropdown-header">alerts center</h6>
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="me-3">
-                                                <div class="bg-primary icon-circle"><i class="fas fa-file-alt text-white"></i></div>
-                                            </div>
-                                            <div><span class="small text-gray-500">December 12, 2019</span>
-                                                <p>A new monthly report is ready to download!</p>
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="me-3">
-                                                <div class="bg-success icon-circle"><i class="fas fa-donate text-white"></i></div>
-                                            </div>
-                                            <div><span class="small text-gray-500">December 7, 2019</span>
-                                                <p>$290.29 has been deposited into your account!</p>
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="me-3">
-                                                <div class="bg-warning icon-circle"><i class="fas fa-exclamation-triangle text-white"></i></div>
-                                            </div>
-                                            <div><span class="small text-gray-500">December 2, 2019</span>
-                                                <p>Spending Alert: We've noticed unusually high spending for your account.</p>
-                                            </div>
-                                        </a><a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="badge bg-danger badge-counter">7</span><i class="fas fa-envelope fa-fw"></i></a>
-                                    <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
-                                        <h6 class="dropdown-header">alerts center</h6>
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image me-3"><img class="rounded-circle" src="assets/img/avatars/avatar4.jpeg">
-                                                <div class="bg-success status-indicator"></div>
-                                            </div>
-                                            <div class="fw-bold">
-                                                <div class="text-truncate"><span>Hi there! I am wondering if you can help me with a problem I've been having.</span></div>
-                                                <p class="small text-gray-500 mb-0">Emily Fowler - 58m</p>
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image me-3"><img class="rounded-circle" src="assets/img/avatars/avatar2.jpeg">
-                                                <div class="status-indicator"></div>
-                                            </div>
-                                            <div class="fw-bold">
-                                                <div class="text-truncate"><span>I have the photos that you ordered last month!</span></div>
-                                                <p class="small text-gray-500 mb-0">Jae Chun - 1d</p>
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image me-3"><img class="rounded-circle" src="assets/img/avatars/avatar3.jpeg">
-                                                <div class="bg-warning status-indicator"></div>
-                                            </div>
-                                            <div class="fw-bold">
-                                                <div class="text-truncate"><span>Last month's report looks great, I am very happy with the progress so far, keep up the good work!</span></div>
-                                                <p class="small text-gray-500 mb-0">Morgan Alvarez - 2d</p>
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <div class="dropdown-list-image me-3"><img class="rounded-circle" src="assets/img/avatars/avatar5.jpeg">
-                                                <div class="bg-success status-indicator"></div>
-                                            </div>
-                                            <div class="fw-bold">
-                                                <div class="text-truncate"><span>Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</span></div>
-                                                <p class="small text-gray-500 mb-0">Chicken the Dog · 2w</p>
-                                            </div>
-                                        </a><a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                                    </div>
-                                </div>
-                                <div class="shadow dropdown-list dropdown-menu dropdown-menu-end" aria-labelledby="alertsDropdown"></div>
+                                <?php include_once "alert-button-process.php"; ?>
                             </li>
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow">
-                                <div class="nav-item dropdown show no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small">Goal Mou</span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar4.jpeg" /></a></li>
+                                <div class="nav-item dropdown show no-arrow">
+                                    <a class="dropdown-toggle nav-link" aria-expanded="true" data-bs-toggle="dropdown" href="#">
+                                        <span class="d-none d-lg-inline me-2 text-gray-600 small">
+                                            <?php
+                                            $sql = "SELECT * FROM `user`
+                                            WHERE user_id = '$id'
+                                            ;";
+                                            $result = mysqli_query($conn, $sql);
+
+                                            while ($row = mysqli_fetch_array($result)) {
+                                                $name = $row['user_email'];
+                                                $photo = $row['user_photo'];
+                                                if (empty($photo)) {
+                                                    $photoSource = "assets/img/default_pp.png";
+                                                } else {
+                                                    $photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';
+                                                }
+                                            }
+                                            echo $name;
+                                            ?>
+                                        </span>
+
+                                        <img class="border rounded-circle img-profile" src="
+                                        <?php
+                                        echo $photoSource;
+                                        ?>
+                                        " />
+                                    </a>
+                            </li>
                         </ul>
-                        </div>
+                    </div>
                 </nav>
                 <div class="container-fluid">
                     <div class="row">
@@ -182,16 +139,17 @@
                                             <form id="mentor-invitation-form" method="post" , action="">
                                                 <div class="mb-3"></div>
                                                 <div class="mb-3"></div>
-                                                <?php 
-                                                if(isset($_GET['id']) && !empty($_GET['id'])){
+                                                <?php
+                                                if (isset($_GET['id']) && !empty($_GET['id'])) {
                                                     $userID = $_GET['id'];
-                                                    $email = $conn -> query("SELECT user_email FROM user WHERE user_id=$userID") -> fetch_assoc()['user_email'];
-                                                }
-                                                else{
-                                                    $email=null;
+                                                    $email = $conn->query("SELECT user_email FROM user WHERE user_id=$userID")->fetch_assoc()['user_email'];
+                                                } else {
+                                                    $email = null;
                                                 }
                                                 ?>
-                                                <div class="d-xl-flex justify-content-xl-center mb-3"><input type="email" id="mentor-email" class="form-control" name="email" placeholder="Type mentor email here" style="width: 745px; text-align: left;"<?php if($email != null){echo "value=$email";}?>></div>
+                                                <div class="d-xl-flex justify-content-xl-center mb-3"><input type="email" id="mentor-email" class="form-control" name="email" placeholder="Type mentor email here" style="width: 745px; text-align: left;" <?php if ($email != null) {
+                                                                                                                                                                                                                                                                echo "value=$email";
+                                                                                                                                                                                                                                                            } ?>></div>
                                                 <div class="d-xl-flex justify-content-xl-center mb-3"><textarea id="invitation-message" class="form-control" name="message" placeholder="Type your invitation message here" rows="14" style="width: 745px;height: 265px;text-align: left;"></textarea></div>
                                                 <div class="d-xl-flex justify-content-xl-center mb-3"><button id="form-submit-button" class="btn btn-primary d-xl-flex justify-content-xl-center align-items-xl-center" role="button" name="feedbackBtn" value="sendFeedback">Send</button></div>
                                             </form>
@@ -202,27 +160,31 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © GTracker 2022</span></div>
                 </div>
-                <footer class="bg-white sticky-footer">
-                    <div class="container my-auto">
-                        <div class="text-center my-auto copyright"><span>Copyright © GTracker 2022</span></div>
-                    </div>
-                </footer>
-            </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
-        </div>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/bs-init.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.js"></script>
-        <script src="assets/js/Simple-Slider.js"></script>
-        <script src="assets/js/theme.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <?php
+    include_once 'show-all-alert-process.php';
+    ?>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.js"></script>
+    <script src="assets/js/Simple-Slider.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </body>
+
 </html>
 
 <script>
     // Work on the form submission when the document is rendered completely
-    $(document).ready(function(){
-        $('#form-submit-button').click(function(e){
+    $(document).ready(function() {
+        $('#form-submit-button').click(function(e) {
             // Prevent the page reloading after form submission
             e.preventDefault();
             let mail_to = $('#mentor-email').val();
@@ -234,12 +196,12 @@
                     email: mail_to,
                     message: mail_content
                 },
-                success:function(data){
+                success: function(data) {
                     document.getElementById('mentor-invitation-form').reset();
                     // data will catch and retunr the values printed by "echo()" in php file
                     alert(data);
                 },
-                error: function(data){
+                error: function(data) {
                     alert(data);
                 }
             })

@@ -20,7 +20,7 @@ if (!$email) {
    $sql = "SELECT * FROM `user` WHERE user_email='$email' AND user_type='$usertype'";
    $result = mysqli_query($conn,$sql);
    if (mysqli_num_rows($result) == 0){
-        echo "No".$usertype." is registered with this email address!";
+        echo "No ".$usertype." is registered with this email address!";
    }
    else{
     $expFormat = mktime(
@@ -51,7 +51,7 @@ if (!$email) {
      // require_once "PHPMailer/SMTP.php";
      // require_once "PHPMailer/Exception.php";
      $mail = new PHPMailer();
-     $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+     // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
      $mail->isSMTP();
      $mail->Host = "smtp.gmail.com"; // Enter your host here
      $mail->SMTPAuth = true;
@@ -70,6 +70,7 @@ if (!$email) {
      echo "Mailer Error: " . $mail->ErrorInfo;
      }else{
      echo "An email has been sent to you with instructions on how to reset your password.";
+     // include_once "link-back-index.php";
          }
    }
   }
