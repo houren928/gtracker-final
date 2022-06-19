@@ -62,7 +62,7 @@ if ($mail_to) {
             if (!$mail->Send()) {
                 echo "Mailer Error: " . $mail->ErrorInfo;
             } else {
-                echo "An email has been sent to you with instructions on how to reset your password.";
+                echo "The invitation email has been sent to your target mentor!";
             }
         }
         // // Format of an email

@@ -7,7 +7,7 @@ include_once "include/m-session.php"
 // The submit button in the form is clicked and the data is passed to this form
 try {
     // $sql = "SELECT * FROM `activity` WHERE goal_id = $goalID AND activity_id = $activityID;";
-    $sql = "SELECT * FROM `alert` WHERE mentee_id = '$roleID'";
+    $sql = "SELECT * FROM `alert` WHERE mentee_id = '$roleID' ORDER BY `alert_date`DESC,`alert_time` DESC";
     $result = mysqli_query($conn, $sql);
     $reversedArray = array();
 
@@ -56,25 +56,30 @@ try {
             $goalID = $row2['goal_id'];
         }
         echo '<a class="dropdown-item d-flex align-items-center" href="alert-linking-process.php?goal-id=';
-        echo $goalID;
-        echo '&activity-id=';
-        echo $activityID;
-        echo '&alert-id=';
-        echo $row['alert_id'];
-        echo '">';
-        
-        
-        echo '<div class="me-3">';
-        echo '<div class="bg-primary icon-circle"><i class="fas fa-file-alt text-white"></i></div>';
-        echo '</div>';
-        echo '<div><span class="small text-gray-500">';
-        echo $activityName;
-        echo '</span>';
-        echo '<p>';
-        echo $row['alert_notes'];
-        echo '</p>';
-        echo '</div>';
-        echo '</a>';
+            echo $goalID;
+            echo '&activity-id=';
+            echo $activityID;
+            echo '&alert-id=';
+            echo $row['alert_id'];
+            echo '">';
+
+
+            echo '<div class="me-3">';
+            echo '<div class="bg-cus-light icon-circle"><i class="fas fa-bell text-white"></i></div>';
+            echo '</div>';
+            echo '<div><span class="small text-gray-700">';
+            echo $activityName;
+            echo '</span>';
+            echo '<div>';
+            echo $row['alert_notes'];
+            echo '</div>';
+            echo '<div><span class="smaller text-gray-500">';
+            echo $row['alert_date'];
+            echo ' ';
+            echo $row['alert_time'];
+            echo '</span></div>';
+            echo '</div>';
+            echo '</a>';
     }
     echo '</div>';
     echo '</div>';

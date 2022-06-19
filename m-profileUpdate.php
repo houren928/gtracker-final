@@ -25,6 +25,13 @@ $result11 = mysqli_query($conn, "SELECT user_photo FROM user WHERE user_id =  $i
 $resultSave = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
 $resultSave1 = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
 $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
+// $resultDelete1 = mysqli_query($conn, "SELECT * FROM mentee WHERE user_id =  $id");
+// $resultDelete2 = mysqli_query($conn, "SELECT * FROM goal WHERE mentee_id =  (SELECT mentee_id FROM mentee WHERE user_id =  $id)");
+$resultDelete6 = mysqli_query($conn, "SELECT * FROM mentor WHERE user_id =  $id");
+
+if ($_GET['error'] == 1) {
+    echo '<script>alert("Image Upload Error - Only support jpg, jpeg, png, gif format file with less than 1Mb")</script>';
+}
 ?>
 
 <!DOCTYPE html>
@@ -68,23 +75,23 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
 <body id="page-top">
     <div id="wrapper">
 
-    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-cus p-0">
-<div class="container-fluid d-flex flex-column p-0">
-    <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-        <div class="sidebar-brand-icon rotate-n-15"><img class="mb-3 mt-4" src="assets/img/logo.png" width="40" height="30" style="transform: rotate(16deg) skew(0deg);margin-right: -10px;"></div>
-        <div class="sidebar-brand-text mx-3"><span>GTracker</span></div>
-    </a>
-    <hr class="sidebar-divider my-0">
-    <ul class="navbar-nav text-light" id="accordionSidebar">
-        <li class="nav-item"><a class="nav-link active" href="m-profileUpdate.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="m-mentees.php"><i class="fas fa-user-plus"></i><span>Mentees</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="logout.php"><i class="far fa-user-circle"></i><span>Logout</span></a></li>
-        <li class="nav-item"></li>
-        <li class="nav-item"></li>
-    </ul>
-    <div class="text-center d-none d-md-inline"></div>
-</div>
-</nav>
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-cus p-0">
+            <div class="container-fluid d-flex flex-column p-0">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="m-mentees.php">
+                    <div class="sidebar-brand-icon rotate-n-15"><img class="mb-3 mt-4" src="assets/img/logo.png" width="40" height="30" style="transform: rotate(16deg) skew(0deg);margin-right: -10px;"></div>
+                    <div class="sidebar-brand-text mx-3"><span>GTracker</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link active" href="m-profileUpdate.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="m-mentees.php"><i class="fas fa-user-plus"></i><span>Mentees</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="logout.php"><i class="far fa-user-circle"></i><span>Logout</span></a></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"></div>
+            </div>
+        </nav>
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
@@ -120,6 +127,10 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                             while ($row = mysqli_fetch_array($result)) {
                                                 $name = $row['user_email'];
                                                 $photo = $row['user_photo'];
+                                                if(empty($photo)){
+                                                    $photoSource = "assets/img/default_pp.png";
+                                                }
+                                                else{$photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';}
                                             }
                                             echo $name;
                                             ?>
@@ -127,7 +138,7 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
 
                                         <img class="border rounded-circle img-profile" src="
                                         <?php
-                                        echo 'data:image/jpeg;base64,' . base64_encode($photo) . '';
+                                        echo $photoSource;
                                         ?>
                                         " />
                                     </a>
@@ -142,7 +153,7 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                             <div class="card mb-3" style="min-height: 396px;">
                                 <?php if ($row = $result11->fetch_assoc()) {
                                     if (empty($row['user_photo'])) { ?>
-                                        <div class="card-body text-center shadow"><img class="border rounded-circle mb-3 mt-4" src="assets/img/2.jpg" width="160" height="160">
+                                        <div class="card-body text-center shadow"><img class="border rounded-circle mb-3 mt-4" src="assets/img/default_pp.png" width="160" height="160">
                                             <!-- <div class="gallery"> -->
                                         <?php } else { ?>
                                             <div class="card-body text-center shadow"><img class="border rounded-circle mb-3 mt-4" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['user_photo']); ?>" width="160" height="160">
@@ -154,7 +165,7 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                                                                                                                                                                                                     echo "<a href = \"profileUpdate.php?user_id=$res[user_id]\"></a>";
                                                                                                                                                                                                                 } ?><input type="submit" id="submit3" name="submit3" hidden></label></div>
                                         </form>
-                                        <div><button class="btn btn-danger" type="button"><?php if ($res = mysqli_fetch_array($resultDelete)) {
+                                        <div><button class="btn btn-danger" type="button"><?php if ($res = mysqli_fetch_array($resultDelete6) || $res = mysqli_fetch_array($resultDelete)) {
                                                                                                 echo "<a style='color:#FFFFFF;' href = \"processDelete.php?user_id=$id\" onClick=\"return confirm('Are you sure you want to delete?')\">DELETE ACCOUNT</a>";
                                                                                             } ?></button></div>
                                             </div>
@@ -229,12 +240,11 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                         <!-- <div class="mb-3"><a href = "profileEdit.php"><button class="btn btn-primary btn-sm" type="submit" id ="submit" name="submit" >Edit Details</button></a></div> -->
                                         <!-- echo "<td><a href=\"edit.php?id=$res[id]\">Edit</a> -->
                                         <div class="mb-3"><button class="btn btn-sm btn-primary" type="button"><?php if ($res = mysqli_fetch_array($resultSave)) {
-                                                                                                                            if($_SESSION['userType'] == "mentee"){
-                                                                                                                                echo "<td><a style='color:#FFFFFF;' href = \"profileEdit1.php?user_id=$id\">Edit Details</a></td>";
-                                                                                                                            }
-                                                                                                                            else{
-                                                                                                                                echo "<td><a style='color:#FFFFFF;' href = \"m-profileEdit1.php?user_id=$id\">Edit Details</a></td>";
-                                                                                                                            }
+                                                                                                                    if ($_SESSION['userType'] == "mentee") {
+                                                                                                                        echo "<td><a style='color:#FFFFFF;' href = \"profileEdit1.php?user_id=$id\">Edit Details</a></td>";
+                                                                                                                    } else {
+                                                                                                                        echo "<td><a style='color:#FFFFFF;' href = \"m-profileEdit1.php?user_id=$id\">Edit Details</a></td>";
+                                                                                                                    }
                                                                                                                 } ?></button>
                                             <!-- <button class="btn btn-primary btn-sm" type="submit" id ="submit" name="submit" >Edit Details</button> -->
                                         </div>
@@ -333,10 +343,9 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                                 <div class="mb-3"><button class="btn btn-sm btn-primary" type="button"><?php if (true
                                                                                                                             // $res = mysqli_fetch_array($resultSave)
                                                                                                                         ) {
-                                                                                                                            if($_SESSION['userType'] == "mentee"){
+                                                                                                                            if ($_SESSION['userType'] == "mentee") {
                                                                                                                                 echo "<td><a style='color:#FFFFFF;' href = \"profileEdit2.php?user_id=$id\">Edit Details</a></td>";
-                                                                                                                            }
-                                                                                                                            else{
+                                                                                                                            } else {
                                                                                                                                 echo "<td><a style='color:#FFFFFF;' href = \"m-profileEdit2.php?user_id=$id\">Edit Details</a></td>";
                                                                                                                             }
                                                                                                                         } ?></button>

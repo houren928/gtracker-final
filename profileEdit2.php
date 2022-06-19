@@ -61,14 +61,21 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
         }
 
         .dropdown .dropdown-list .dropdown-header {
-            background-color:  #3a6ea5;
-            border: 1px solid  #3a6ea5;
+            background-color: #3a6ea5;
+            border: 1px solid #3a6ea5;
             padding-top: .75rem;
             padding-bottom: .75rem;
             color: #fff;
         }
+
         .bg-cus-light {
-            background-color: rgba(58, 110, 165,0.8);
+            background-color: rgba(58, 110, 165, 0.8);
+        }
+
+        .smaller {
+            font-size: x-small;
+            text-align: end;
+            font-weight: light;
         }
     </style>
 
@@ -79,14 +86,15 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
 
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-cus p-0">
             <div class="container-fluid d-flex flex-column p-0">
-                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="dashboard.php">
+
                     <div class="sidebar-brand-icon rotate-n-15"><img class="mb-3 mt-4" src="assets/img/logo.png" width="40" height="30" style="transform: rotate(16deg) skew(0deg);margin-right: -10px;"></div>
                     <div class="sidebar-brand-text mx-3"><span>GTracker</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item"><a class="nav-link" href="dashboard.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" href="profileDummy.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="profileUpdate.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="goals.php"><i class="fas fa-bullseye" style="color: rgba(255,255,255,0.42);"></i><span style="margin-left: 0px;">Goals</span></a><a class="nav-link" href="find-mentor-dashboard.php"><i class="fas fa-user-plus"></i><span>Find Mentor</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="index.php"><i class="far fa-user-circle"></i><span>Logout</span></a></li>
                     <li class="nav-item"></li>
@@ -282,26 +290,26 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                             </div>
                                             <div class="card-body">
                                                 <form method="POST" action="processDummy.php">
-                                                    <div class="mb-3"><label class="form-label" for="contact"><strong>Contact Number</strong></label><input class="form-control" type="number" id="contact" placeholder="+60184724920" name="contact" required value="<?php
+                                                    <div class="mb-3"><label class="form-label" for="contact"><strong>Contact Number</strong></label><input class="form-control" type="text" id="contact" placeholder="+60184724920" name="contact" required value="<?php
                                                                                                                                                                                                                                                                     if ($res = mysqli_fetch_array($result7)) {
                                                                                                                                                                                                                                                                         echo $res['user_contact_num'];
                                                                                                                                                                                                                                                                     }
                                                                                                                                                                                                                                                                     ?>"></div>
-                                                    <div class="mb-3"><label class="form-label" for="address"><strong>Address</strong></label><input class="form-control" type="text" id="address" placeholder="Sunset Blvd, 38" name="address" value="<?php
+                                                    <div class="mb-3"><label class="form-label" for="address"><strong>Address</strong></label><input class="form-control" type="text" id="address" placeholder="Sunset Blvd, 38" name="address" required value="<?php
                                                                                                                                                                                                                                                         if ($res = mysqli_fetch_array($result8)) {
                                                                                                                                                                                                                                                             echo $res['user_address'];
                                                                                                                                                                                                                                                         }
                                                                                                                                                                                                                                                         ?>"></div>
                                                     <div class="row">
                                                         <div class="col">
-                                                            <div class="mb-3"><label class="form-label" for="city"><strong>City</strong></label><input class="form-control" type="text" id="city" placeholder="Los Angeles" name="city" value="<?php
+                                                            <div class="mb-3"><label class="form-label" for="city"><strong>City</strong></label><input class="form-control" type="text" id="city" placeholder="Los Angeles" name="city" required value="<?php
                                                                                                                                                                                                                                                 if ($res = mysqli_fetch_array($result9)) {
                                                                                                                                                                                                                                                     echo $res['user_city'];
                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                                 ?>"></div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="mb-3"><label class="form-label" for="country"><strong>Country</strong></label><input class="form-control" type="text" id="country" placeholder="USA" name="country" value="<?php
+                                                            <div class="mb-3"><label class="form-label" for="country"><strong>Country</strong></label><input class="form-control" type="text" id="country" placeholder="USA" name="country" required value="<?php
                                                                                                                                                                                                                                                     if ($res = mysqli_fetch_array($result10)) {
                                                                                                                                                                                                                                                         echo $res['user_country'];
                                                                                                                                                                                                                                                     }

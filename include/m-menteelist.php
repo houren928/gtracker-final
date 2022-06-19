@@ -19,16 +19,35 @@ if ($mentees != null) {
                 if ($result) {
                     $menteeDetails = $result->fetch_assoc();
                 ?>
-                    <td><img class="rounded-circle me-2" width="30" height="30" src="
-
-                    <?php
-                    echo 'data:image/jpeg;base64,' . base64_encode($menteeDetails['user_photo']) . '';
-                    ?>
-                    
-                    "><?php echo $menteeDetails['user_username']; ?></a></td>
-                    <td><?php echo $menteeDetails['user_country']; ?></td>
-                    <td><?php echo $menteeDetails['user_email']; ?></td>
-                    <td><?php echo $menteeDetails['user_birthdate']; ?></td>
+                    <td>
+                <img class="border rounded-circle me-2" width="30" height="30" src="<?php
+                                                                                if (empty($menteeDetails['user_photo'])) {
+                                                                                    $photoSource = "assets/img/default_pp.png";
+                                                                                } else {
+                                                                                    $photoSource = 'data:image/jpeg;base64,' . base64_encode($menteeDetails['user_photo']) . '';
+                                                                                }
+                                                                                echo $photoSource ?>">
+                <?php
+                if (empty($menteeDetails['user_username'])) {
+                    echo '-';
+                } else {
+                    echo $menteeDetails['user_username'];
+                } ?>
+                <!-- </a> -->
+            </td>
+            <td><?php
+                if (empty($menteeDetails['user_country'])) {
+                    echo '-';
+                } else {
+                    echo $menteeDetails['user_country'];
+                } ?></td>
+            <td><?php echo $menteeDetails['user_email']; ?></td>
+            <td><?php
+                if (empty($menteeDetails['user_birthdate'])) {
+                    echo '-';
+                } else {
+                    echo $menteeDetails['user_birthdate'];
+                } ?></td>
                 <?php
                 } else {
                     // The database is not able to execute the prepared statement

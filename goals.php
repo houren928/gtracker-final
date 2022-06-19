@@ -37,23 +37,30 @@ include_once "goal-page-process.php";
     <link rel="stylesheet" href="assets/css/untitled.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-<style>
+    <style>
         .bg-cus {
             background-color: #3a6ea5;
         }
 
         .dropdown .dropdown-list .dropdown-header {
-            background-color:  #3a6ea5;
-            border: 1px solid  #3a6ea5;
+            background-color: #3a6ea5;
+            border: 1px solid #3a6ea5;
             padding-top: .75rem;
             padding-bottom: .75rem;
             color: #fff;
         }
+
         .bg-cus-light {
-            background-color: rgba(58, 110, 165,0.8);
+            background-color: rgba(58, 110, 165, 0.8);
+        }
+
+        .smaller {
+            font-size: x-small;
+            text-align: end;
+            font-weight: light;
         }
     </style>
-    
+
 </head>
 
 <body id="page-top">
@@ -61,7 +68,8 @@ include_once "goal-page-process.php";
 
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-cus p-0">
             <div class="container-fluid d-flex flex-column p-0">
-                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="dashboard.php">
+
                     <div class="sidebar-brand-icon rotate-n-15"><img class="mb-3 mt-4" src="assets/img/logo.png" width="40" height="30" style="transform: rotate(16deg) skew(0deg);margin-right: -10px;"></div>
                     <div class="sidebar-brand-text mx-3"><span>GTracker</span></div>
                 </a>
@@ -112,10 +120,11 @@ include_once "goal-page-process.php";
                                             while ($row = mysqli_fetch_array($result)) {
                                                 $name = $row['user_email'];
                                                 $photo = $row['user_photo'];
-                                                if(empty($photo)){
+                                                if (empty($photo)) {
                                                     $photoSource = "assets/img/default_pp.png";
+                                                } else {
+                                                    $photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';
                                                 }
-                                                else{$photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';}
                                             }
                                             echo $name;
                                             ?>
@@ -166,7 +175,16 @@ include_once "goal-page-process.php";
                                             echo 'ap-action-plan.php?goal-id=';
                                             echo $newGoal['goal_id']; //Change with targeted goal
                                             echo '">';
-                                            echo '<td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">';
+                                            echo '<td>';
+                                            echo '<img class="rounded-circle me-2" width="30" height="30" src="';
+                                            if (empty($photo)) {
+                                                $photoSource = "assets/img/default_pp.png";
+                                            } else {
+                                                $photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';
+                                            }
+                                            echo $photoSource;
+                                            echo '">';
+                                            echo '';
                                             echo $newGoal["goal_title"];
                                             echo '</td>';
                                             echo '<td>';
@@ -218,7 +236,16 @@ include_once "goal-page-process.php";
                                             echo 'ap-action-plan.php?goal-id=';
                                             echo $pendingGoal['goal_id']; //Change with targeted goal
                                             echo '">';
-                                            echo '<td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">';
+                                            echo '<td>';
+                                            echo '<img class="rounded-circle me-2" width="30" height="30" src="';
+                                            if (empty($photo)) {
+                                                $photoSource = "assets/img/default_pp.png";
+                                            } else {
+                                                $photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';
+                                            }
+                                            echo $photoSource;
+                                            echo '">';
+                                            echo '';
                                             echo $pendingGoal["goal_title"];
                                             echo '</td>';
                                             echo '<td>';
@@ -270,7 +297,16 @@ include_once "goal-page-process.php";
                                             echo 'ap-action-plan.php?goal-id=';
                                             echo $completedGoal['goal_id']; //Change with targeted goal
                                             echo '">';
-                                            echo '<td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">';
+                                            echo '<td>';
+                                            echo '<img class="rounded-circle me-2" width="30" height="30" src="';
+                                            if (empty($photo)) {
+                                                $photoSource = "assets/img/default_pp.png";
+                                            } else {
+                                                $photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';
+                                            }
+                                            echo $photoSource;
+                                            echo '">';
+                                            echo '';
                                             echo $completedGoal["goal_title"];
                                             echo '</td>';
                                             echo '<td>';

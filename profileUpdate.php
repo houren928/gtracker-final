@@ -29,6 +29,14 @@ $result11 = mysqli_query($conn, "SELECT user_photo FROM user WHERE user_id =  $i
 $resultSave = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
 $resultSave1 = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
 $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
+$resultDelete1 = mysqli_query($conn, "SELECT * FROM mentee WHERE user_id =  $id");
+$resultDelete2 = mysqli_query($conn, "SELECT * FROM goal WHERE mentee_id =  (SELECT mentee_id FROM mentee WHERE user_id =  $id)");
+// $resultDelete6 = mysqli_query($conn, "SELECT * FROM mentor WHERE user_id =  $id");
+
+if($_GET['error']==1){
+    echo '<script>alert("Image Upload Error - Only support jpg, jpeg, png, gif format file with less than 1Mb")</script>';
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -67,14 +75,21 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
         }
 
         .dropdown .dropdown-list .dropdown-header {
-            background-color:  #3a6ea5;
-            border: 1px solid  #3a6ea5;
+            background-color: #3a6ea5;
+            border: 1px solid #3a6ea5;
             padding-top: .75rem;
             padding-bottom: .75rem;
             color: #fff;
         }
+
         .bg-cus-light {
-            background-color: rgba(58, 110, 165,0.8);
+            background-color: rgba(58, 110, 165, 0.8);
+        }
+
+        .smaller {
+            font-size: x-small;
+            text-align: end;
+            font-weight: light;
         }
     </style>
 
@@ -85,14 +100,15 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
 
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-cus p-0">
             <div class="container-fluid d-flex flex-column p-0">
-                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="dashboard.php">
+
                     <div class="sidebar-brand-icon rotate-n-15"><img class="mb-3 mt-4" src="assets/img/logo.png" width="40" height="30" style="transform: rotate(16deg) skew(0deg);margin-right: -10px;"></div>
                     <div class="sidebar-brand-text mx-3"><span>GTracker</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item"><a class="nav-link" href="dashboard.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" href="profileDummy.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="profileUpdate.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="goals.php"><i class="fas fa-bullseye" style="color: rgba(255,255,255,0.42);"></i><span style="margin-left: 0px;">Goals</span></a><a class="nav-link" href="find-mentor-dashboard.php"><i class="fas fa-user-plus"></i><span>Find Mentor</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="index.php"><i class="far fa-user-circle"></i><span>Logout</span></a></li>
                     <li class="nav-item"></li>
@@ -174,7 +190,7 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                                                                                                                                                                                                     echo "<a href = \"profileUpdate.php?user_id=$res[user_id]\"></a>";
                                                                                                                                                                                                                 } ?><input type="submit" id="submit3" name="submit3" hidden></label></div>
                                         </form>
-                                        <div><button class="btn btn-danger" type="button"><?php if ($res = mysqli_fetch_array($resultDelete)) {
+                                        <div><button class="btn btn-danger" type="button"><?php if ($res = mysqli_fetch_array($resultDelete2) || $res = mysqli_fetch_array($resultDelete1) || $res = mysqli_fetch_array($resultDelete)) {
                                                                                                 echo "<a style='color:#FFFFFF;' href = \"processDelete.php?user_id=$id\" onClick=\"return confirm('Are you sure you want to delete?')\">DELETE ACCOUNT</a>";
                                                                                             } ?></button></div>
                                             </div>

@@ -87,19 +87,17 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
 <body id="page-top">
     <div id="wrapper">
 
-        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-cus p-0">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-cus p-0">
             <div class="container-fluid d-flex flex-column p-0">
-                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="dashboard.php">
-
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="m-mentees.php">
                     <div class="sidebar-brand-icon rotate-n-15"><img class="mb-3 mt-4" src="assets/img/logo.png" width="40" height="30" style="transform: rotate(16deg) skew(0deg);margin-right: -10px;"></div>
                     <div class="sidebar-brand-text mx-3"><span>GTracker</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link " href="dashboard.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" href="profileDummy.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="goals.php"><i class="fas fa-bullseye" style="color: rgba(255,255,255,0.42);"></i><span style="margin-left: 0px;">Goals</span></a><a class="nav-link" href="find-mentor-dashboard.php"><i class="fas fa-user-plus"></i><span>Find Mentor</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.php"><i class="far fa-user-circle"></i><span>Logout</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="m-profileUpdate.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="m-mentees.php"><i class="fas fa-user-plus"></i><span>Mentees</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="logout.php"><i class="far fa-user-circle"></i><span>Logout</span></a></li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                 </ul>
@@ -108,7 +106,7 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
         </nav>
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
-            <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
                         <h6 class="text-nowrap text-black-50 mb-0">“Believe you can and you're halfway there.” — Theodore Roosevelt.</h6>
                         <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -124,9 +122,9 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                     </form>
                                 </div>
                             </li>
-                            <li class="nav-item dropdown no-arrow mx-1">
+                            <!-- <li class="nav-item dropdown no-arrow mx-1">
                                 <?php include_once "alert-button-process.php"; ?>
-                            </li>
+                            </li> -->
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown show no-arrow">
@@ -141,10 +139,11 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                             while ($row = mysqli_fetch_array($result)) {
                                                 $name = $row['user_email'];
                                                 $photo = $row['user_photo'];
-                                                if(empty($photo)){
+                                                if (empty($photo)) {
                                                     $photoSource = "assets/img/default_pp.png";
+                                                } else {
+                                                    $photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';
                                                 }
-                                                else{$photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';}
                                             }
                                             echo $name;
                                             ?>

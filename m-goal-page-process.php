@@ -5,69 +5,28 @@ include_once "include/m-session.php";
 
 <?php
 // The submit button in the form is clicked and the data is passed to this form
+$newGoals = array();
+$pendingGoals = array();
+$completedGoals = array();
 try {
+    $menteeID = $_GET['id'];
     $sql = "SELECT * FROM `goal`
-    WHERE mentee_id = '$roleID'
+    WHERE mentee_id = $menteeID
     ;";
     $result = mysqli_query($conn, $sql);
 
     while ($row = mysqli_fetch_array($result)) {
-        // echo print_r($row);
-        echo '<tr class=\'clickable-row\' data-href="';
-        echo 'ap-action-plan.php?goal-id=';
-        echo $row['goal_id']; //Change with targeted goal
-        echo '">';
-        echo '<td>';
-        echo '<img class="rounded-circle me-2" width="30" height="30" src="'; 
-        if(empty($photo)){
-            $photoSource = "assets/img/default_pp.png";
-        }
-        else{$photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';}
-        echo $photoSource;
-        echo '">';
-        echo '';
-        echo $row["goal_title"];
-        echo '</td>';
-        echo '<td>';
-        echo $row["goal_start_date"];
-        echo '</td>';
-        echo '<td>';
-        echo $row["goal_completion_date"];
-        echo '</td>';
+        // echo "haha";
         if ($row["goal_completion_flag"] == 1) {
-            echo '<td><span class="badge bg-success">Done</span></td>';
-            echo '<td>';
-            echo '<div class="progress">';
-            echo '<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: ';
-            echo $row["goal_progress"];
-            echo '%;">';
-            echo $row["goal_progress"];
-            echo '%</div>';
+            array_push($completedGoals, $row);
         } elseif ($row["goal_progress"] == 0) {
-            echo '<td><span class="badge bg-info">New</span></td>';
-            echo '<td>';
-            echo '<div class="progress">';
-            echo '<div class="progress-bar progress-bar-striped progress-bar-animated bg-gray-400" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: ';
-            echo '100';
-            echo '%;">';
-            echo '0';
-            echo '%</div>';
+            array_push($newGoals, $row);
         } else {
-            echo '<td><span class="badge bg-warning">Pending</span></td>';
-            echo '<td>';
-            echo '<div class="progress">';
-            echo '<div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: ';
-            echo $row["goal_progress"];
-            echo '%;">';
-            echo $row["goal_progress"];
-            echo '%</div>';
+            array_push($pendingGoals, $row);
         }
-
-        echo '</div>';
-        // echo '</div>';
-        echo '</td>';
-        echo '</tr>';
     }
+    // echo print_r($newGoals);
+
     // mysqli_close($conn);
 } catch (mysqli_sql_exception $e) {
     die($e->getMessage());

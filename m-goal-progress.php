@@ -48,8 +48,8 @@
 
     <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-cus p-0">
             <div class="container-fluid d-flex flex-column p-0">
-                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-                    <div class="sidebar-brand-icon rotate-n-15"><img class="mb-3 mt-4" src="assets/img/logo.png" width="40" height="30" style="transform: rotate(16deg) skew(0deg);margin-right: -10px;"></div>
+
+<a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="m-mentees.php">                    <div class="sidebar-brand-icon rotate-n-15"><img class="mb-3 mt-4" src="assets/img/logo.png" width="40" height="30" style="transform: rotate(16deg) skew(0deg);margin-right: -10px;"></div>
                     <div class="sidebar-brand-text mx-3"><span>GTracker</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
@@ -400,10 +400,11 @@
                     type: 'post',
                     url: 'm-send-feedback-process.php?gid=<?php echo $goalID;?>&mid=<?php echo $menteeID;?>',
                     data: {message: feedbackMsg},
+                    dataType: 'JSON',
                     success: function(data) {                           
                             // Ajax call completed successfully
                             document.getElementById('feedback-form').reset(); // Clear the input field after form submission
-                             alert('Your feedback is sent successfully!');
+                             alert(data.send);
                            
                         },
                         error: function(data) {

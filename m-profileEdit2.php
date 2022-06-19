@@ -68,7 +68,7 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
 
     <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-cus p-0">
 <div class="container-fluid d-flex flex-column p-0">
-    <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+<a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="m-mentees.php">
         <div class="sidebar-brand-icon rotate-n-15"><img class="mb-3 mt-4" src="assets/img/logo.png" width="40" height="30" style="transform: rotate(16deg) skew(0deg);margin-right: -10px;"></div>
         <div class="sidebar-brand-text mx-3"><span>GTracker</span></div>
     </a>
@@ -118,6 +118,10 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                             while ($row = mysqli_fetch_array($result)) {
                                                 $name = $row['user_email'];
                                                 $photo = $row['user_photo'];
+                                                if(empty($photo)){
+                                                    $photoSource = "assets/img/default_pp.png";
+                                                }
+                                                else{$photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';}
                                             }
                                             echo $name;
                                             ?>
@@ -125,7 +129,7 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
 
                                         <img class="border rounded-circle img-profile" src="
                                         <?php
-                                        echo 'data:image/jpeg;base64,' . base64_encode($photo) . '';
+                                        echo $photoSource;
                                         ?>
                                         " />
                                     </a>
@@ -140,7 +144,7 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                             <div class="card mb-3" style="min-height: 396px;">
                                 <?php if ($row = $result11->fetch_assoc()) {
                                     if (empty($row['user_photo'])) { ?>
-                                        <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="assets/img/2.jpg" width="160" height="160">
+                                        <div class="card-body text-center shadow"><img class="border rounded-circle mb-3 mt-4" src="assets/img/default_pp.png" width="160" height="160">
                                             <!-- <div class="gallery"> -->
                                         <?php } else { ?>
                                             <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['user_photo']); ?>" width="160" height="160">
@@ -276,21 +280,21 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                                                                                                                                                                                                                                                         echo $res['user_contact_num'];
                                                                                                                                                                                                                                                                     }
                                                                                                                                                                                                                                                                     ?>"></div>
-                                                    <div class="mb-3"><label class="form-label" for="address"><strong>Address</strong></label><input class="form-control" type="text" id="address" placeholder="Sunset Blvd, 38" name="address" value="<?php
+                                                    <div class="mb-3"><label class="form-label" for="address"><strong>Address</strong></label><input class="form-control" type="text" id="address" placeholder="Sunset Blvd, 38" name="address" required value="<?php
                                                                                                                                                                                                                                                         if ($res = mysqli_fetch_array($result8)) {
                                                                                                                                                                                                                                                             echo $res['user_address'];
                                                                                                                                                                                                                                                         }
                                                                                                                                                                                                                                                         ?>"></div>
                                                     <div class="row">
                                                         <div class="col">
-                                                            <div class="mb-3"><label class="form-label" for="city"><strong>City</strong></label><input class="form-control" type="text" id="city" placeholder="Los Angeles" name="city" value="<?php
+                                                            <div class="mb-3"><label class="form-label" for="city"><strong>City</strong></label><input class="form-control" type="text" id="city" placeholder="Los Angeles" name="city" required value="<?php
                                                                                                                                                                                                                                                 if ($res = mysqli_fetch_array($result9)) {
                                                                                                                                                                                                                                                     echo $res['user_city'];
                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                                 ?>"></div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="mb-3"><label class="form-label" for="country"><strong>Country</strong></label><input class="form-control" type="text" id="country" placeholder="USA" name="country" value="<?php
+                                                            <div class="mb-3"><label class="form-label" for="country"><strong>Country</strong></label><input class="form-control" type="text" id="country" placeholder="USA" name="country" required value="<?php
                                                                                                                                                                                                                                                     if ($res = mysqli_fetch_array($result10)) {
                                                                                                                                                                                                                                                         echo $res['user_country'];
                                                                                                                                                                                                                                                     }

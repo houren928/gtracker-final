@@ -1,9 +1,16 @@
 <?php
 include_once "include/config.php"; // Always include the database oconnection before accessing the database
-include_once "include/m-session.php"
+include_once "include/m-session.php";
+date_default_timezone_set("Asia/Kuala_lumpur");
+// echo date_default_timezone_get();
+$dt = new DateTime();
+$today = $dt->format('Y-m-d H:i:s');
+        // echo $today;
 ?>
 
 <?php
+// date_default_timezone_set("Asia/Kuala_Lumpur");
+
 // The submit button in the form is clicked and the data is passed to this form
 try {
     // $sql = "SELECT * FROM `activity` WHERE goal_id = $goalID AND activity_id = $activityID;";
@@ -36,9 +43,18 @@ try {
         //     break;
         // }
         // $flag ++;
-        $today = date("Y-m-d H:i:s");
-        $date = $row['alert_date'] . " " . $row['alert_time'];
-        if ($date <= $today) {
+        // $dt = new DateTime();
+        // $today = $dt->format('Y-m-d H:i:s');
+        $alertD = $row['alert_date'];
+        $alertT = $row['alert_time'];
+        $datetime = "$alertD $alertT";
+        $date = DateTime::createFromFormat("Y-m-d H:i:s",  $datetime);
+
+        // datetime.strptime('$alertD $alertT', '%b %d %Y %I:%M%p')
+        // echo "<script>console.log($date);</script>";
+        // $today = date("Y-m-d H:i:s");
+        // $date = $row['alert_date'] . " " . $row['alert_time'];
+        if ($date <= $dt) {
             // if (time() >= strtotime($row['alert_time'])) {
             array_push($reversedArray, $row);
             // }
@@ -82,12 +98,17 @@ try {
             echo '<div class="me-3">';
             echo '<div class="bg-cus-light icon-circle"><i class="fas fa-bell text-white"></i></div>';
             echo '</div>';
-            echo '<div><span class="small text-gray-500">';
+            echo '<div><span class="small text-gray-700">';
             echo $activityName;
             echo '</span>';
-            echo '<p>';
+            echo '<div>';
             echo $row['alert_notes'];
-            echo '</p>';
+            echo '</div>';
+            echo '<div><span class="smaller text-gray-500">';
+            echo $row['alert_date'];
+            echo ' ';
+            echo $row['alert_time'];
+            echo '</span></div>';
             echo '</div>';
             echo '</a>';
             if ($flag >= 2) {
