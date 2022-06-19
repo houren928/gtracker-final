@@ -122,9 +122,6 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                     </form>
                                 </div>
                             </li>
-                            <!-- <li class="nav-item dropdown no-arrow mx-1">
-                                <?php include_once "alert-button-process.php"; ?>
-                            </li> -->
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown show no-arrow">
