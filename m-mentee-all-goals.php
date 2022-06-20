@@ -14,7 +14,7 @@
                     <td><?php echo $goal['goal_title']; ?></td>
                     <td><?php echo $goal['goal_start_date']; ?></td>
                     <td><?php echo $goal['goal_completion_date']; ?></td>
-                    <td><span class="badge bg-primary"><?php echo $goal['goal_status']; ?></span></td>
+                    <td><span class="badge bg-primary"><?php echo $goal['goal_completion_flag']; ?></span></td>
                     <td>
                         <div class="progress">
                                 <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"><?php echo $goal['goal_progress']; ?>%</div>
