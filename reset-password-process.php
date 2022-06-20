@@ -35,7 +35,7 @@ if (!$email) {
      $output='<p>Dear user,</p>';
      $output.='<p>Please click on the following link to reset your password.</p>';
      $output.='<p>-------------------------------------------------------------</p>';
-     $output.='<p><a href="http://localhost/project/gtracker-mentor-1.0/error-change-password.php?key='.$key.'&type='.$usertype.'&email='.$email.'&action=reset" target="_blank">Set Your New Password</a></p>';		
+     $output.='<p><a href="http://localhost/project/gtracker-final/error-change-password.php?key='.$key.'&type='.$usertype.'&email='.$email.'&action=reset" target="_blank">Set Your New Password</a></p>';		
      $output.='<p>-------------------------------------------------------------</p>';
      $output.='<p>Please be sure to copy the entire link into your browser.
      The link will expire after 1 day for security reason.</p>';
@@ -43,9 +43,9 @@ if (!$email) {
      is needed, your password will not be reset. However, you may want to log into 
      your account and change your security password as someone may have guessed it.</p>';   	
      $output.='<p>Thanks,</p>';
-     $output.='<p>GoulMou Team</p>';
+     $output.='<p>GTracker Team</p>';
      $body = $output; 
-     $subject = "Password Recovery - GoulMou.com";
+     $subject = "Password Recovery - GTracker.com";
      $fromserver = "noreply@GoalTracker.com"; 
      // require_once "PHPMailer/PHPMailer.php";
      // require_once "PHPMailer/SMTP.php";
@@ -61,7 +61,7 @@ if (!$email) {
      $mail->Port = 587;
      $mail->IsHTML(true);
      $mail->From = "noreply@yourwebsite.com";
-     $mail->FromName = "GoulMou";
+     $mail->FromName = "GTracker";
      $mail->Sender = $fromserver; // indicates ReturnPath header
      $mail->Subject = $subject;
      $mail->Body = $body;

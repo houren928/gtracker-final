@@ -29,9 +29,10 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
 // $resultDelete2 = mysqli_query($conn, "SELECT * FROM goal WHERE mentee_id =  (SELECT mentee_id FROM mentee WHERE user_id =  $id)");
 $resultDelete6 = mysqli_query($conn, "SELECT * FROM mentor WHERE user_id =  $id");
 
+if(isset($_GET['error'])){
 if ($_GET['error'] == 1) {
     echo '<script>alert("Image Upload Error - Only support jpg, jpeg, png, gif format file with less than 1Mb")</script>';
-}
+}}
 ?>
 
 <!DOCTYPE html>

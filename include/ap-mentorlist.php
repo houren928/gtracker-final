@@ -37,7 +37,7 @@ if ($mentors != null) {
     <?php endforeach;
 } else {
     // The database is not able to execute the prepared statement
-    echo ("Something wrong happens");
+    echo ("There are no registered mentor curerently.");
 }
     ?>
         </tr>
