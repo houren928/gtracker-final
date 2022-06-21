@@ -1,5 +1,7 @@
 <?php 
 session_start();
+// echo $_SESSION['userID'];
+// echo $_SESSION['userType'];
 if((isset($_SESSION['userID']) && !empty($_SESSION['userID']))  && (isset($_SESSION['userType']) && !empty($_SESSION['userType']))){
     $id = $_SESSION['userID'];
     $type = $_SESSION['userType'];
@@ -16,6 +18,8 @@ if((isset($_SESSION['userID']) && !empty($_SESSION['userID']))  && (isset($_SESS
     }
 }
 else{
-    echo("Session cannot be set up. Something wrong happens...");
+    header("Location:index.php");
+    die();
+    // echo("Session cannot be set up. Something wrong happens...");
 }
 ?>
