@@ -48,11 +48,11 @@
 
             <div class="row justify-content-center">
                 <div class="col">
-                <form action="register-login.php" method="get">
-                    <div class="btn-group d-grid gap-2 col-6 mx-auto text-center" role="group" aria-label="Basic outlined example">
-                        <button class="btn btn-outline-primary" id="r-mentor-btn" name="type" value="mentor">Mentor</button>
-                        <button class="btn btn-outline-primary" id="r-mentee-btn" name="type" value="mentee">Mentee</button>
-                    </div>
+                    <form action="register-login.php" method="get">
+                        <div class="btn-group d-grid gap-2 col-6 mx-auto text-center" role="group" aria-label="Basic outlined example">
+                            <button class="btn btn-outline-primary" id="r-mentor-btn" name="type" value="mentor">Mentor</button>
+                            <button class="btn btn-outline-primary" id="r-mentee-btn" name="type" value="mentee">Mentee</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -65,6 +65,12 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="scripts/register-welcome.js" type="text/javascript"></script>
+    <!-- <script>
+        history.pushState(null, null, null);
+        window.addEventListener('popstate', function() {
+            history.pushState(null, null, null);
+        });
+    </script> -->
 
 </body>
 

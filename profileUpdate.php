@@ -32,10 +32,11 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
 $resultDelete1 = mysqli_query($conn, "SELECT * FROM mentee WHERE user_id =  $id");
 $resultDelete2 = mysqli_query($conn, "SELECT * FROM goal WHERE mentee_id =  (SELECT mentee_id FROM mentee WHERE user_id =  $id)");
 // $resultDelete6 = mysqli_query($conn, "SELECT * FROM mentor WHERE user_id =  $id");
-if(isset($_GET['error'])){
-if($_GET['error']==1){
-    echo '<script>alert("Image Upload Error - Only support jpg, jpeg, png, gif format file with less than 1Mb")</script>';
-}}
+if (isset($_GET['error'])) {
+    if ($_GET['error'] == 1) {
+        echo '<script>alert("Image Upload Error - Only support jpg, jpeg, png, gif format file with less than 1Mb")</script>';
+    }
+}
 
 ?>
 
@@ -152,10 +153,11 @@ if($_GET['error']==1){
                                             while ($row = mysqli_fetch_array($result)) {
                                                 $name = $row['user_email'];
                                                 $photo = $row['user_photo'];
-                                                if(empty($photo)){
+                                                if (empty($photo)) {
                                                     $photoSource = "assets/img/default_pp.png";
+                                                } else {
+                                                    $photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';
                                                 }
-                                                else{$photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';}
                                             }
                                             echo $name;
                                             ?>
