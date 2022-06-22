@@ -20,6 +20,5 @@ if((isset($_SESSION['userID']) && !empty($_SESSION['userID']))  && (isset($_SESS
 else{
     header("Location:index.php");
     die();
-    // echo("Session cannot be set up. Something wrong happens...");
 }
 ?>
