@@ -1,9 +1,9 @@
 <?php 
-$dbName = "gtracker_db";
+$dbName = "gtracker";
 $dbUserName= "hebat";
 $dbHostName = "localhost";
 $dbPassword = "hebat123";
-$portNo = 3307; // Our database is connected to port 3307 (default is 3306), if you're using the default, ignore this code
+$portNo = 3307; // Our database is connected to port 3307 (default is 3306)
 // Build connection to our database
 $conn = mysqli_connect($dbHostName, $dbUserName, $dbPassword, $dbName, $portNo);
 // When there's connection error, we should find it out & print it

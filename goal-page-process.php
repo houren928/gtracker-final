@@ -12,7 +12,7 @@ try {
     $menteeID = $_SESSION['menteeID'];
     $sql = "SELECT * FROM `goal`
     WHERE mentee_id = $menteeID
-    ;";
+    ";
     $result = mysqli_query($conn, $sql);
 
     while ($row = mysqli_fetch_array($result)) {

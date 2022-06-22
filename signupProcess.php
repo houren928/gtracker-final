@@ -79,7 +79,7 @@ if (isset($_POST['signUpBtn'])) {
                     // $userID = $fetch['user_id'];
                     $result2 = $conn->query("SELECT mentor_id FROM mentor WHERE user_id=$userID");
                     $_SESSION['mentorID'] = mysqli_fetch_assoc($result2)['mentor_id'];
-                    header("Location:m-profileUpdate.php?success=loginsuccessfully");
+                    header("Location:m-profileDummy.php?success=loginsuccessfully");
                 }
                 if ($_SESSION['userType'] == 'mentee') {
                     // $userID = $fetch['user_id'];

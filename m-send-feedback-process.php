@@ -20,10 +20,12 @@
             // Execute the complete query after binding the value
             $result = $stmt -> execute();
             if($result){
-                header("Location: m-goal-progress.php.?success=das");
+                echo json_encode (["send" =>"Your feedback is sent successfully"]);
+                // header("Location: m-goal-progress.php.?success=das");
             }
             else{
-                header("Location: m-goal-progress.php.?fail=error");
+                echo json_encode(["send" => "Your feedback cannot be sent. Please try again later"]);
+                // header("Location: m-goal-progress.php.?fail=error");
             }
         }
         // Close the statement after completing the query execution

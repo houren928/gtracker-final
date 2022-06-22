@@ -16,7 +16,7 @@ include_once "include/m-session.php"
             // Retrieve the menteeID that the mentor clicks just now
             global $menteeID;
             // Initialise a prepared statement
-            $sql = "SELECT goal_id, goal_title, goal_start_date, goal_completion_date, goal_status, goal_progress, goal_completion_flag FROM goal WHERE mentee_id = ?";
+            $sql = "SELECT goal_id, goal_title, goal_start_date, goal_completion_date, goal_progress, goal_completion_flag FROM goal WHERE mentee_id = ?";
             // Create a prepared statement
             $stmt = $this->conn->prepare($sql);
             if($stmt){

@@ -50,8 +50,8 @@ $mentees = $dCtrl->index();
 
     <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-cus p-0">
             <div class="container-fluid d-flex flex-column p-0">
-                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-                    <div class="sidebar-brand-icon rotate-n-15"><img class="mb-3 mt-4" src="assets/img/logo.png" width="40" height="30" style="transform: rotate(16deg) skew(0deg);margin-right: -10px;"></div>
+
+<a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="m-mentees.php">                    <div class="sidebar-brand-icon rotate-n-15"><img class="mb-3 mt-4" src="assets/img/logo.png" width="40" height="30" style="transform: rotate(16deg) skew(0deg);margin-right: -10px;"></div>
                     <div class="sidebar-brand-text mx-3"><span>GTracker</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
@@ -175,13 +175,13 @@ $mentees = $dCtrl->index();
         let data = $(this).attr('id'); // Store the user_id in a variable
         if(data != null){
             window.location.href = "m-goals.php?id="+data; // Utilize $_GET to identfy which mentee the mentor clicks
-        }
-    });
-    // Change the appearance of the row when the mouse hover over the row
-    $('#dataTable tbody tr').hover(function() {
-        $(this).css('cursor', 'pointer');
-        }, function() {
-        $(this).css('cursor', 'auto');
-        });
+            // Change the appearance of the row when the mouse hover over the row
+            $('#dataTable tbody tr').hover(function() {
+                $(this).css('cursor', 'pointer');
+                }, function() {
+                $(this).css('cursor', 'auto');
+                });
+                }
+            });
     });
 </script>

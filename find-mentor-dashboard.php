@@ -45,14 +45,21 @@ $mentors = $dCtrl->index();
         }
 
         .dropdown .dropdown-list .dropdown-header {
-            background-color:  #3a6ea5;
-            border: 1px solid  #3a6ea5;
+            background-color: #3a6ea5;
+            border: 1px solid #3a6ea5;
             padding-top: .75rem;
             padding-bottom: .75rem;
             color: #fff;
         }
+
         .bg-cus-light {
-            background-color: rgba(58, 110, 165,0.8);
+            background-color: rgba(58, 110, 165, 0.8);
+        }
+
+        .smaller {
+            font-size: x-small;
+            text-align: end;
+            font-weight: light;
         }
     </style>
 
@@ -62,7 +69,8 @@ $mentors = $dCtrl->index();
     <div id="wrapper">
     <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-cus p-0">
             <div class="container-fluid d-flex flex-column p-0">
-                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="dashboard.php">
+
                     <div class="sidebar-brand-icon rotate-n-15"><img class="mb-3 mt-4" src="assets/img/logo.png" width="40" height="30" style="transform: rotate(16deg) skew(0deg);margin-right: -10px;"></div>
                     <div class="sidebar-brand-text mx-3"><span>GTracker</span></div>
                 </a>
@@ -174,6 +182,9 @@ $mentors = $dCtrl->index();
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
+    <?php
+    include_once 'show-all-alert-process.php';
+    ?>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/chart.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
@@ -195,13 +206,15 @@ $mentors = $dCtrl->index();
         // Make each row clickable and retreive the information of the clicked mentee
         $('#dataTable tbody tr').click(function() {
             let data = $(this).attr('id'); // Store the user_id in a variable
-            window.location.href = "find-mentor.php?id=" + data; // Utilize $_GET to identfy which mentee the mentor clicks
-        });
-        // Change the appearance of the row when the mouse hover over the row
-        $('#dataTable tbody tr').hover(function() {
-            $(this).css('cursor', 'pointer');
-        }, function() {
-            $(this).css('cursor', 'auto');
+            if(data != null){
+                window.location.href = "find-mentor.php?id=" + data; // Utilize $_GET to identfy which mentee the mentor clicks
+                // Change the appearance of the row when the mouse hover over the row
+                $('#dataTable tbody tr').hover(function() {
+                    $(this).css('cursor', 'pointer');
+                }, function() {
+                    $(this).css('cursor', 'auto');
+                });
+            }
         });
     });
 </script>

@@ -43,14 +43,21 @@ include_once "include/m-session.php"
         }
 
         .dropdown .dropdown-list .dropdown-header {
-            background-color:  #3a6ea5;
-            border: 1px solid  #3a6ea5;
+            background-color: #3a6ea5;
+            border: 1px solid #3a6ea5;
             padding-top: .75rem;
             padding-bottom: .75rem;
             color: #fff;
         }
+
         .bg-cus-light {
-            background-color: rgba(58, 110, 165,0.8);
+            background-color: rgba(58, 110, 165, 0.8);
+        }
+
+        .smaller {
+            font-size: x-small;
+            text-align: end;
+            font-weight: light;
         }
     </style>
 
@@ -62,7 +69,8 @@ include_once "include/m-session.php"
 
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-cus p-0">
             <div class="container-fluid d-flex flex-column p-0">
-                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="dashboard.php">
+
                     <div class="sidebar-brand-icon rotate-n-15"><img class="mb-3 mt-4" src="assets/img/logo.png" width="40" height="30" style="transform: rotate(16deg) skew(0deg);margin-right: -10px;"></div>
                     <div class="sidebar-brand-text mx-3"><span>GTracker</span></div>
                 </a>
@@ -113,10 +121,11 @@ include_once "include/m-session.php"
                                             while ($row = mysqli_fetch_array($result)) {
                                                 $name = $row['user_email'];
                                                 $photo = $row['user_photo'];
-                                                if(empty($photo)){
+                                                if (empty($photo)) {
                                                     $photoSource = "assets/img/default_pp.png";
+                                                } else {
+                                                    $photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';
                                                 }
-                                                else{$photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';}
                                             }
                                             echo $name;
                                             ?>
@@ -259,7 +268,10 @@ include_once "include/m-session.php"
                         </div>
                     </div>
                 </section>
-                <div class="text-center mt-5"><a href="ap-action-plan.html">← Back to Main Goal Page</a></div>
+                <div class="text-center mt-5"><a href="<?php 
+                echo "ap-action-plan.php?goal-id=";
+                echo $goalID;
+                ?>">← Back to Main Goal Page</a></div>
             </div>
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">

@@ -36,14 +36,21 @@ include_once "include/m-session.php"
         }
 
         .dropdown .dropdown-list .dropdown-header {
-            background-color:  #3a6ea5;
-            border: 1px solid  #3a6ea5;
+            background-color: #3a6ea5;
+            border: 1px solid #3a6ea5;
             padding-top: .75rem;
             padding-bottom: .75rem;
             color: #fff;
         }
+
         .bg-cus-light {
-            background-color: rgba(58, 110, 165,0.8);
+            background-color: rgba(58, 110, 165, 0.8);
+        }
+
+        .smaller {
+            font-size: x-small;
+            text-align: end;
+            font-weight: light;
         }
     </style>
     
@@ -54,7 +61,8 @@ include_once "include/m-session.php"
 
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-cus p-0">
             <div class="container-fluid d-flex flex-column p-0">
-                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="dashboard.php">
+
                     <div class="sidebar-brand-icon rotate-n-15"><img class="mb-3 mt-4" src="assets/img/logo.png" width="40" height="30" style="transform: rotate(16deg) skew(0deg);margin-right: -10px;"></div>
                     <div class="sidebar-brand-text mx-3"><span>GTracker</span></div>
                 </a>
@@ -207,7 +215,7 @@ include_once "include/m-session.php"
                     $goalID = $_GET['goal-id'];
                     echo '<div class="buttons"><a class="btn btn-primary" role="button" href="goal-progress.php?goal-id=';
                     echo $goalID;
-                    echo '">View Goal Progress</a><a class="btn btn-light" role="button" href="/project/gtracker-mentor-1.0/ap-new-activity.php?goal-id=';
+                    echo '">View Goal Progress</a><a class="btn btn-light" role="button" href="ap-new-activity.php?goal-id=';
                     echo $goalID;
                     echo '">ADD ACTIVITY</a></div>';
                     ?>

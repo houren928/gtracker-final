@@ -36,7 +36,7 @@ include_once "include/config.php"; // Always include the database oconnection be
 
             <div class="row justify-content-center">
                 <div class="col-5">
-                    <form action="signupProcess.php?type=<?php echo($_GET['type'])?><?php if(isset($_GET['response'])){echo "&response=".$_GET['response']."&mid=".$_GET['mid'];}?>" class="needs-validation" novalidate method="post">
+                    <form method="post" action="signupProcess.php?type=<?php echo($_GET['type'])?><?php if(isset($_GET['response'])){echo "&response=".$_GET['response']."&mid=".$_GET['mid'];}?>" class="needs-validation" novalidate>
                         <div class="mb-4">
                             <label for="mySignUpEmail" class="form-label"><strong>Email</strong></label>
                             <input type="email" class="form-control" id="mySignUpEmail" name="email" placeholder="Enter Email" required>

@@ -4,12 +4,13 @@ if((isset($_SESSION['userID']) && !empty($_SESSION['userID']))  && (isset($_SESS
     $id = $_SESSION['userID'];
     $type = $_SESSION['userType'];
     $roleID = null; // Check the current user is a mentor / mentee
-    if(isset($_SESSION['mentorID']) && !empty($_SESSION['mentorID'])){
+    if($_SESSION['userType'] == 'mentor'){
         $roleID = $_SESSION['mentorID'];
     }
-    else if(isset($_SESSION['menteeID']) && !empty($_SESSION['menteeID'])){
+   else{
         $roleID = $_SESSION['menteeID'];
-    }
+   }
+//    print_r($_SESSION);
     // If the application is unable to recognize the user type, we should print error message
     if($roleID == null){
         echo("Unable to recognize user type");

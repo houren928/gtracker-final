@@ -13,6 +13,7 @@ try {
 
     $flag = 0;
     echo '<div class="row people" style="padding-bottom: 1px;">';
+
     while ($row = mysqli_fetch_array($result)) {
         if ($flag == 3) {
             echo '</div>';
@@ -99,7 +100,7 @@ try {
             $paragraph = '<p class="title">Ends in ' . $timeBound . ' days.</p>';
         }
         print '<div class="col-md-6 col-lg-4 text-success item" style="cursor: pointer;" onclick="window.location=\' ' .
-            '/Project/gtracker-mentor-1.0/ap-action-plan-slider.php?goal-id=' //Need to be replaced with target web link
+            'ap-action-plan-slider.php?goal-id=' //Need to be replaced with target web link
             . $goalID
             . '&activity-id='
             . $row['activity_id']

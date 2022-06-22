@@ -45,7 +45,7 @@ if ($mail_to) {
             //  require_once "PHPMailer/Exception.php";
             $mail = new PHPMailer();
             // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-            $mail->isSMTP();
+            // $mail->isSMTP();                                            // Comment this line if "SMTP() connect fails"
             $mail->Host = "smtp.gmail.com"; // Enter your host here
             $mail->SMTPAuth = true;
             $mail->Username = "nickholes0928@gmail.com"; // Enter your email here
@@ -62,7 +62,7 @@ if ($mail_to) {
             if (!$mail->Send()) {
                 echo "Mailer Error: " . $mail->ErrorInfo;
             } else {
-                echo "An email has been sent to you with instructions on how to reset your password.";
+                echo "The invitation email has been sent to your target mentor!";
             }
         }
         // // Format of an email

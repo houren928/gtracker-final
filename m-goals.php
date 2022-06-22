@@ -1,10 +1,18 @@
-<?php  include_once "include/config.php";?>
-<?php  include_once "include/m-session.php";?>
-<?php 
+<?php include_once "include/config.php"; ?>
+<?php include_once "include/m-session.php"; ?>
+<?php
 // require_once "class/mentee-goals-list.php";
 // $dCtrl  =   new goalController($conn);
 // $menteeGoals = $dCtrl->index();
-include_once "goal-page-process.php";
+include_once "m-goal-page-process.php";
+$menteeID = $_GET['id'];
+$sql2 = "SELECT * FROM user WHERE user_id = (SELECT user_id FROM mentee WHERE mentee_id = $menteeID)";
+$result2 = mysqli_query($conn, $sql2);
+
+while ($row = mysqli_fetch_array($result2)) {
+    // $name = $row['user_email'];
+    $menteePhoto = $row['user_photo'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -40,20 +48,21 @@ include_once "goal-page-process.php";
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"> -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-<style>
+    <style>
         .bg-cus {
             background-color: #3a6ea5;
         }
     </style>
-    
+
 </head>
 
 <body id="page-top">
     <div id="wrapper">
 
-    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-cus p-0">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-cus p-0">
             <div class="container-fluid d-flex flex-column p-0">
-                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="m-mentees.php">
                     <div class="sidebar-brand-icon rotate-n-15"><img class="mb-3 mt-4" src="assets/img/logo.png" width="40" height="30" style="transform: rotate(16deg) skew(0deg);margin-right: -10px;"></div>
                     <div class="sidebar-brand-text mx-3"><span>GTracker</span></div>
                 </a>
@@ -113,7 +122,7 @@ include_once "goal-page-process.php";
                                     </a>
                             </li>
                         </ul>
-                        </div>
+                    </div>
                 </nav>
                 <div class="container-fluid">
                     <div class="row" style="height: 47.5938px;">
@@ -145,31 +154,40 @@ include_once "goal-page-process.php";
                                     </thead>
                                     <tbody>
                                         <?php
-                                     foreach ($newGoals as $newGoal) {
-                                        echo '<tr class=\'clickable-row\' data-href="';
-                                        echo 'm-ap-action-plan.php?gid='.$newGoal['goal_id'].'&mid='.$_GET['id'].'';
-                                        echo '">';
-                                        echo '<td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">';
-                                        echo $newGoal["goal_title"];
-                                        echo '</td>';
-                                        echo '<td>';
-                                        echo $newGoal["goal_start_date"];
-                                        echo '</td>';
-                                        echo '<td>';
-                                        echo $newGoal["goal_completion_date"];
-                                        echo '</td>';
-                                        echo '<td><span class="badge bg-info">New</span></td>';
-                                        echo '<td>';
-                                        echo '<div class="progress">';
-                                        echo '<div class="progress-bar progress-bar-striped progress-bar-animated bg-gray-400" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: ';
-                                        echo '100';
-                                        echo '%;">';
-                                        echo '0';
-                                        echo '%</div>';
-                                        echo '</div>';
-                                        echo '</td>';
-                                        echo '</tr>';
-                                    }; ?>
+                                        foreach ($newGoals as $newGoal) {
+                                            echo '<tr class=\'clickable-row\' data-href="';
+                                            echo 'm-ap-action-plan.php?gid=' . $newGoal['goal_id'] . '&mid=' . $_GET['id'] . '';
+                                            echo '">';
+                                            echo '<td>';
+                                            echo '<img class="rounded-circle me-2" width="30" height="30" src="';
+                                            if (empty($menteePhoto)) {
+                                                $photoSource = "assets/img/default_pp.png";
+                                            } else {
+                                                $photoSource = 'data:image/jpeg;base64,' . base64_encode($menteePhoto) . '';
+                                            }
+                                            echo $photoSource;
+                                            echo '">';
+                                            echo '';
+                                            echo $newGoal["goal_title"];
+                                            echo '</td>';
+                                            echo '<td>';
+                                            echo $newGoal["goal_start_date"];
+                                            echo '</td>';
+                                            echo '<td>';
+                                            echo $newGoal["goal_completion_date"];
+                                            echo '</td>';
+                                            echo '<td><span class="badge bg-info">New</span></td>';
+                                            echo '<td>';
+                                            echo '<div class="progress">';
+                                            echo '<div class="progress-bar progress-bar-striped progress-bar-animated bg-gray-400" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: ';
+                                            echo '100';
+                                            echo '%;">';
+                                            echo '0';
+                                            echo '%</div>';
+                                            echo '</div>';
+                                            echo '</td>';
+                                            echo '</tr>';
+                                        }; ?>
                                     </tbody>
                                     <tfoot>
                                         <tr></tr>
@@ -198,9 +216,18 @@ include_once "goal-page-process.php";
                                         <?php
                                         foreach ($pendingGoals as $pendingGoal) {
                                             echo '<tr class=\'clickable-row\' data-href="';
-                                            echo 'm-ap-action-plan.php?gid='.$pendingGoal['goal_id'].'&mid='.$_GET['id'].'';
+                                            echo 'm-ap-action-plan.php?gid=' . $pendingGoal['goal_id'] . '&mid=' . $_GET['id'] . '';
                                             echo '">';
-                                            echo '<td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">';
+                                            echo '<td>';
+                                            echo '<img class="rounded-circle me-2" width="30" height="30" src="';
+                                            if (empty($menteePhoto)) {
+                                                $photoSource = "assets/img/default_pp.png";
+                                            } else {
+                                                $photoSource = 'data:image/jpeg;base64,' . base64_encode($menteePhoto) . '';
+                                            }
+                                            echo $photoSource;
+                                            echo '">';
+                                            echo '';
                                             echo $pendingGoal["goal_title"];
                                             echo '</td>';
                                             echo '<td>';
@@ -249,9 +276,18 @@ include_once "goal-page-process.php";
                                         <?php
                                         foreach ($completedGoals as $completedGoal) {
                                             echo '<tr class=\'clickable-row\' data-href="';
-                                            echo 'm-ap-action-plan.php?gid='.$completedGoal['goal_id'].'&mid='.$_GET['id'].'';
+                                            echo 'm-ap-action-plan.php?gid=' . $completedGoal['goal_id'] . '&mid=' . $_GET['id'] . '';
                                             echo '">';
-                                            echo '<td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">';
+                                            echo '<td>';
+                                            echo '<img class="rounded-circle me-2" width="30" height="30" src="';
+                                            if (empty($menteePhoto)) {
+                                                $photoSource = "assets/img/default_pp.png";
+                                            } else {
+                                                $photoSource = 'data:image/jpeg;base64,' . base64_encode($menteePhoto) . '';
+                                            }
+                                            echo $photoSource;
+                                            echo '">';
+                                            echo '';
                                             echo $completedGoal["goal_title"];
                                             echo '</td>';
                                             echo '<td>';
@@ -302,8 +338,8 @@ include_once "goal-page-process.php";
                                                 </tr>
                                             </thead>
                                             <tbody> -->
-                                            <!-- Print out all weekly goal list of a clicked mentee using DataTable-->
-                                            <!-- 
+                <!-- Print out all weekly goal list of a clicked mentee using DataTable-->
+                <!-- 
                                             </tbody>
                                     </table>
                                     </div>
@@ -330,8 +366,8 @@ include_once "goal-page-process.php";
                                                 </tr>
                                             </thead>
                                             <tbody> -->
-                                            <!-- Print out all the goal list of specific mentee here using DataTable-->
-                                            <!-- 
+                <!-- Print out all the goal list of specific mentee here using DataTable-->
+                <!-- 
                                             </tbody>
                                     </table>
                                     </div>
@@ -340,56 +376,57 @@ include_once "goal-page-process.php";
                         </div> 
                     </div>
                 </div> -->
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © GTracker 2022</span></div>
                 </div>
-                <footer class="bg-white sticky-footer">
-                    <div class="container my-auto">
-                        <div class="text-center my-auto copyright"><span>Copyright © GTracker 2022</span></div>
-                    </div>
-                </footer>
-            </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
-        </div>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/bs-init.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.js"></script>
-        <script src="assets/js/Simple-Slider.js"></script>
-        <script src="assets/js/theme.js"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	    <!-- CDN jQuery Datatable -->
-	    <!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script> -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js "></script>
-        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js "></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.js"></script>
+    <script src="assets/js/Simple-Slider.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- CDN jQuery Datatable -->
+    <!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js "></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
+
 </html>
 <!-- apply datatable in the HTML table -->
 <script>
-        $(document).ready(function() {
-            $('#dataTable').DataTable(); //Change your table id
+    $(document).ready(function() {
+        $('#dataTable').DataTable(); //Change your table id
+    });
+    jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("href");
         });
-        jQuery(document).ready(function($) {
-            $(".clickable-row").click(function() {
-                window.location = $(this).data("href");
-            });
+    });
+    $(document).ready(function() {
+        $('#dataTable1').DataTable(); //Change your table id
+    });
+    jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("href");
         });
-        $(document).ready(function() {
-            $('#dataTable1').DataTable(); //Change your table id
+    });
+    $(document).ready(function() {
+        $('#dataTable2').DataTable(); //Change your table id
+    });
+    jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("href");
         });
-        jQuery(document).ready(function($) {
-            $(".clickable-row").click(function() {
-                window.location = $(this).data("href");
-            });
-        });
-        $(document).ready(function() {
-            $('#dataTable2').DataTable(); //Change your table id
-        });
-        jQuery(document).ready(function($) {
-            $(".clickable-row").click(function() {
-                window.location = $(this).data("href");
-            });
-        });
-    </script>
+    });
+</script>
 <!-- <script>
      // Create a datatable for the mentee list
     $(document).ready(function() {
@@ -400,19 +437,19 @@ include_once "goal-page-process.php";
        $('#dataTable1 tbody tr').click(function () {
         let data = $(this).attr('id'); // Store the user_id in a variable
         if(data != null){
-            window.location.href = "m-ap-action-plan.php?gid="+data+"&mid="+<?php echo($_GET['id']);?>; // Utilize $_GET to identfy which mentee the mentor clicks
+            window.location.href = "m-ap-action-plan.php?gid="+data+"&mid="+<?php echo ($_GET['id']); ?>; // Utilize $_GET to identfy which mentee the mentor clicks
         }
     });
     $('#dataTable2 tbody tr').click(function () {
         let data = $(this).attr('id'); // Store the user_id in a variable
         if(data != null){
-            window.location.href = "m-ap-action-plan.php?gid="+data+"&mid="+<?php echo($_GET['id']);?>; // Utilize $_GET to identfy which mentee the mentor clicks
+            window.location.href = "m-ap-action-plan.php?gid="+data+"&mid="+<?php echo ($_GET['id']); ?>; // Utilize $_GET to identfy which mentee the mentor clicks
         }
     });
     $('#dataTable tbody tr').click(function () {
         let data = $(this).attr('id'); // Store the user_id in a variable
         if(data != null){
-            window.location.href = "m-ap-action-plan.php?gid="+data+"&mid="+<?php echo($_GET['id']);?>; // Utilize $_GET to identfy which mentee the mentor clicks
+            window.location.href = "m-ap-action-plan.php?gid="+data+"&mid="+<?php echo ($_GET['id']); ?>; // Utilize $_GET to identfy which mentee the mentor clicks
         }
     });
     // Change the appearance of the row when the mouse hover over the row

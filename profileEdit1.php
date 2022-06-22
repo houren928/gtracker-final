@@ -60,14 +60,21 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
         }
 
         .dropdown .dropdown-list .dropdown-header {
-            background-color:  #3a6ea5;
-            border: 1px solid  #3a6ea5;
+            background-color: #3a6ea5;
+            border: 1px solid #3a6ea5;
             padding-top: .75rem;
             padding-bottom: .75rem;
             color: #fff;
         }
+
         .bg-cus-light {
-            background-color: rgba(58, 110, 165,0.8);
+            background-color: rgba(58, 110, 165, 0.8);
+        }
+
+        .smaller {
+            font-size: x-small;
+            text-align: end;
+            font-weight: light;
         }
     </style>
 
@@ -78,14 +85,15 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
 
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-cus p-0">
             <div class="container-fluid d-flex flex-column p-0">
-                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="dashboard.php">
+
                     <div class="sidebar-brand-icon rotate-n-15"><img class="mb-3 mt-4" src="assets/img/logo.png" width="40" height="30" style="transform: rotate(16deg) skew(0deg);margin-right: -10px;"></div>
                     <div class="sidebar-brand-text mx-3"><span>GTracker</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item"><a class="nav-link" href="dashboard.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item"><a class="nav-link active" href="profileDummy.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="profileUpdate.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="goals.php"><i class="fas fa-bullseye" style="color: rgba(255,255,255,0.42);"></i><span style="margin-left: 0px;">Goals</span></a><a class="nav-link" href="find-mentor-dashboard.php"><i class="fas fa-user-plus"></i><span>Find Mentor</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="index.php"><i class="far fa-user-circle"></i><span>Logout</span></a></li>
                     <li class="nav-item"></li>
@@ -180,7 +188,7 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                         <form method="POST" action="processDummy.php">
                                             <div class="row">
                                                 <div class="col">
-                                                    <div class="mb-3"><label class="form-label" for="username"><strong>Username</strong></label><input class="form-control" type="text" id="username" placeholder="user.name" name="username" required value="<?php
+                                                    <div class="mb-3"><label class="form-label" for="username"><strong>Username</strong></label><input class="form-control" type="text" id="username" required placeholder="user.name" name="username" required value="<?php
                                                                                                                                                                                                                                                                 if ($res = mysqli_fetch_array($result1)) {
                                                                                                                                                                                                                                                                     echo $res['user_username'];
                                                                                                                                                                                                                                                                 }
@@ -197,14 +205,14 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                             </div>
                                             <div class="row">
                                                 <div class="col">
-                                                    <div class="mb-3"><label class="form-label" for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" id="first_name" placeholder="John" name="first_name" value="<?php
+                                                    <div class="mb-3"><label class="form-label" for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" id="first_name" required placeholder="John" name="first_name" value="<?php
                                                                                                                                                                                                                                                         if ($res = mysqli_fetch_array($result3)) {
                                                                                                                                                                                                                                                             echo $res['user_fname'];
                                                                                                                                                                                                                                                         }
                                                                                                                                                                                                                                                         ?>"></div>
                                                 </div>
                                                 <div class="col">
-                                                    <div class="mb-3"><label class="form-label" for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" id="last_name" placeholder="Doe" name="last_name" value="<?php
+                                                    <div class="mb-3"><label class="form-label" for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" id="last_name" required placeholder="Doe" name="last_name" value="<?php
                                                                                                                                                                                                                                                     if ($res = mysqli_fetch_array($result4)) {
                                                                                                                                                                                                                                                         echo $res['user_lname'];
                                                                                                                                                                                                                                                     }
@@ -213,14 +221,14 @@ $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
                                             </div>
                                             <div class="row">
                                                 <div class="col">
-                                                    <div class="mb-3"><label class="form-label" for="first_name"><strong>Age</strong></label><input class="form-control" type="number" id="age" placeholder="32" name="age" value="<?php
+                                                    <div class="mb-3"><label class="form-label" for="first_name"><strong>Age</strong></label><input class="form-control" type="number" id="age" required placeholder="32" name="age" value="<?php
                                                                                                                                                                                                                                     if ($res = mysqli_fetch_array($result5)) {
                                                                                                                                                                                                                                         echo $res['user_birthdate'];
                                                                                                                                                                                                                                     }
                                                                                                                                                                                                                                     ?>"></div>
                                                 </div>
                                                 <div class="col">
-                                                    <div class="mb-3"><label class="form-label" for="last_name"><strong>Gender</strong></label><input class="form-control" type="text" id="gender" placeholder="Male" name="gender" value="<?php
+                                                    <div class="mb-3"><label class="form-label" for="last_name"><strong>Gender</strong></label><input class="form-control" type="text" id="gender" required placeholder="Male" name="gender" value="<?php
                                                                                                                                                                                                                                             if ($res = mysqli_fetch_array($result6)) {
                                                                                                                                                                                                                                                 echo $res['user_gender'];
                                                                                                                                                                                                                                             }
