@@ -224,6 +224,7 @@ if (isset($_GET['error'])) {
                                                 if ($res = mysqli_fetch_array($result2)) {
                                                     echo $res['user_email'];
                                                 }
+                                                
                                                 ?>
                                             </div>
                                         </div>
