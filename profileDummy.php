@@ -1,11 +1,12 @@
 <?php
 
 include_once "include/config.php";
+include_once "include/m-session.php";
 
-session_start();
-if ((isset($_SESSION['userID']) && !empty($_SESSION['userID']))) {
-    $id = $_SESSION['userID'];
-}
+// session_start();
+// if ((isset($_SESSION['userID']) && !empty($_SESSION['userID']))) {
+//     $id = $_SESSION['userID'];
+// }
 
 $result1 = mysqli_query($conn, "SELECT user_id FROM user WHERE user_id =  $id");
 $resultDelete = mysqli_query($conn, "SELECT * FROM user WHERE user_id =  $id");
