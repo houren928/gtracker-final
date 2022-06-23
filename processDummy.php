@@ -43,8 +43,13 @@ if (isset($_POST['submit1'])) {
     } else {
         //Step 3. Execute the SQL query.
         //updating the table
-        $result = mysqli_query($conn, "UPDATE user SET user_username='$username',user_fname='$first_name', user_lname='$last_name',user_birthdate='$age',user_gender='$gender' WHERE user_id=$id");
-
+        $result = mysqli_query($conn, "UPDATE user 
+                                       SET user_username='$username',
+                                       user_fname='$first_name', 
+                                       user_lname='$last_name',
+                                       user_birthdate='$age',
+                                       user_gender='$gender' 
+                                       WHERE user_id=$id");
         //redirectig to the display page. In our case, it is index.php
         if ($result && $_SESSION['userType'] == "mentee") {
             header("Location: profileUpdate.php");

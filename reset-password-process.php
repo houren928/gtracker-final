@@ -2,8 +2,6 @@
 
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
 require 'vendor/autoload.php';
@@ -31,7 +29,8 @@ if (!$email) {
         $addKey = substr(md5(uniqid(rand(),1)),3,10);
         $key = $key . $addKey;
      // Insert Temp Table
-     $conn -> query("INSERT INTO `password_reset_temp` (`email`, `key`, `expDate`) VALUES ('".$email."', '".$key."', '".$expDate."');");
+     $conn -> query("INSERT INTO `password_reset_temp` (`email`, `key`, `expDate`, `user_type`) 
+                     VALUES ('".$email."', '".$key."', '".$expDate."', '".$usertype."');");
      $output='<p>Dear user,</p>';
      $output.='<p>Please click on the following link to reset your password.</p>';
      $output.='<p>-------------------------------------------------------------</p>';
@@ -47,18 +46,15 @@ if (!$email) {
      $body = $output; 
      $subject = "Password Recovery - GTracker.com";
      $fromserver = "noreply@GoalTracker.com"; 
-     // require_once "PHPMailer/PHPMailer.php";
-     // require_once "PHPMailer/SMTP.php";
-     // require_once "PHPMailer/Exception.php";
      $mail = new PHPMailer();
      // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-     $mail->isSMTP();
+     // $mail->isSMTP();
      $mail->Host = "smtp.gmail.com"; // Enter your host here
      $mail->SMTPAuth = true;
      $mail->Username = "nickholes0928@gmail.com"; // Enter your email here
      $mail->Password = "rnjokffdrhftefsr"; //Enter your password here
      $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
-     $mail->Port = 587;
+     $mail->Port = 465;
      $mail->IsHTML(true);
      $mail->From = "noreply@yourwebsite.com";
      $mail->FromName = "GTracker";

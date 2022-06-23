@@ -14,7 +14,7 @@ $today = $dt->format('Y-m-d H:i:s');
 // The submit button in the form is clicked and the data is passed to this form
 try {
     // $sql = "SELECT * FROM `activity` WHERE goal_id = $goalID AND activity_id = $activityID;";
-    $sql = "SELECT * FROM `alert` WHERE mentee_id = '$roleID'";
+    $sql = "SELECT * FROM `alert` WHERE `mentee_id` = $roleID";
     $result = mysqli_query($conn, $sql);
     $reversedArray = array();
 

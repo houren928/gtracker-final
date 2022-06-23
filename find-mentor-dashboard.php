@@ -206,13 +206,15 @@ $mentors = $dCtrl->index();
         // Make each row clickable and retreive the information of the clicked mentee
         $('#dataTable tbody tr').click(function() {
             let data = $(this).attr('id'); // Store the user_id in a variable
-            window.location.href = "find-mentor.php?id=" + data; // Utilize $_GET to identfy which mentee the mentor clicks
-        });
-        // Change the appearance of the row when the mouse hover over the row
-        $('#dataTable tbody tr').hover(function() {
-            $(this).css('cursor', 'pointer');
-        }, function() {
-            $(this).css('cursor', 'auto');
+            if(data != null){
+                window.location.href = "find-mentor.php?id=" + data; // Utilize $_GET to identfy which mentee the mentor clicks
+                // Change the appearance of the row when the mouse hover over the row
+                $('#dataTable tbody tr').hover(function() {
+                    $(this).css('cursor', 'pointer');
+                }, function() {
+                    $(this).css('cursor', 'auto');
+                });
+            }
         });
     });
 </script>

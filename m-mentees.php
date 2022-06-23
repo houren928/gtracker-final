@@ -175,13 +175,13 @@ $mentees = $dCtrl->index();
         let data = $(this).attr('id'); // Store the user_id in a variable
         if(data != null){
             window.location.href = "m-goals.php?id="+data; // Utilize $_GET to identfy which mentee the mentor clicks
-        }
-    });
-    // Change the appearance of the row when the mouse hover over the row
-    $('#dataTable tbody tr').hover(function() {
-        $(this).css('cursor', 'pointer');
-        }, function() {
-        $(this).css('cursor', 'auto');
-        });
+            // Change the appearance of the row when the mouse hover over the row
+            $('#dataTable tbody tr').hover(function() {
+                $(this).css('cursor', 'pointer');
+                }, function() {
+                $(this).css('cursor', 'auto');
+                });
+                }
+            });
     });
 </script>
