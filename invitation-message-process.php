@@ -34,7 +34,7 @@ if ($mail_to) {
             $output.='<p>-------------------------------------------------------------</p>';
             // Encode the email and passed to the URL when the user click the accept / reject link
             $email_encoded = rtrim(strtr(base64_encode($mail_to), '+/', '-_'), '=');
-            $output .= '<a href="http://localhost/project/gtracker-final/invitation-confirmation.php?response=1&user='.$email_encoded.'">Accept</a>&emsp;<a href="http://localhost/project/gtracker-mentor-1.0/invitation-confirmation.php?response=0&user='.$email_encoded.'">Reject</a>';
+            $output .= '<a href="http://localhost/project/gtracker-final/invitation-confirmation.php?response=1&user='.$email_encoded.'">Accept</a>&emsp;<a href="http://localhost/project/gtracker-final/invitation-confirmation.php?response=0&user='.$email_encoded.'">Reject</a>';
             $output.='<p>Thanks,</p>';
             $output.='<p>Gtracker Team</p>';
             $body = $output; 
