@@ -50,7 +50,6 @@ if (isset($_POST['submit1'])) {
                                        user_birthdate='$age',
                                        user_gender='$gender' 
                                        WHERE user_id=$id");
-
         //redirectig to the display page. In our case, it is index.php
         if ($result && $_SESSION['userType'] == "mentee") {
             header("Location: profileUpdate.php");

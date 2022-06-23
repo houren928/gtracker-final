@@ -35,6 +35,9 @@ if ($mentors != null) {
                     echo $mentor['user_birthdate'];
                 } ?></td>
     <?php endforeach;
+} else {
+    // The database is not able to execute the prepared statement
+    echo ("There are no registered mentor currrently.");
 }
     ?>
         </tr>

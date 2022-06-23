@@ -34,11 +34,11 @@ if ($mail_to) {
             $output.='<p>-------------------------------------------------------------</p>';
             // Encode the email and passed to the URL when the user click the accept / reject link
             $email_encoded = rtrim(strtr(base64_encode($mail_to), '+/', '-_'), '=');
-            $output .= '<a href="http://localhost/project/gtracker-mentor-1.0/invitation-confirmation.php?response=1&user='.$email_encoded.'">Accept</a>&emsp;<a href="http://localhost/project/gtracker-mentor-1.0/invitation-confirmation.php?response=0&user='.$email_encoded.'">Reject</a>';
+            $output .= '<a href="http://localhost/project/gtracker-final/invitation-confirmation.php?response=1&user='.$email_encoded.'">Accept</a>&emsp;<a href="http://localhost/project/gtracker-mentor-1.0/invitation-confirmation.php?response=0&user='.$email_encoded.'">Reject</a>';
             $output.='<p>Thanks,</p>';
-            $output.='<p>GoulMou Team</p>';
+            $output.='<p>Gtracker Team</p>';
             $body = $output; 
-            $subject = "Invitation to be My Mentor - GoulMou.com";
+            $subject = "Invitation to be My Mentor - Gtracker.com";
             $fromserver = "noreply@GoalTracker.com";
             //  require_once "vendor/phpmailer/phpmailer/src/PHPMailer.php";
             //  require_once "PHPMailer/SMTP.php";
@@ -54,7 +54,7 @@ if ($mail_to) {
             $mail->Port       = 587;
             $mail->IsHTML(true);
             $mail->From = "noreply@yourwebsite.com";
-            $mail->FromName = "GoulMou";
+            $mail->FromName = "GTracker";
             $mail->Sender = $fromserver; // indicates ReturnPath header
             $mail->Subject = $subject;
             $mail->Body = $body;

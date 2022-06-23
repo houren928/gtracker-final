@@ -12,7 +12,7 @@
             // Retrieve the menteeID that the mentor clicks just now
             $menteeID = $_GET['id'];
             // Initialise a prepared statement
-            $sql = "SELECT goal_id, goal_title, goal_start_date, goal_completion_date, goal_status, goal_progress FROM goal WHERE mentee_id = ?";
+            $sql = "SELECT goal_id, goal_title, goal_start_date, goal_completion_date, goal_completion_flag, goal_progress FROM goal WHERE mentee_id = ?";
             // Create a prepared statement
             $stmt = $this->conn->prepare($sql);
             if($stmt){

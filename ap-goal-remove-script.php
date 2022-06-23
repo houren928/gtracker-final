@@ -26,6 +26,8 @@ try {
         $result2 = mysqli_query($conn, $sql2);
     };
 
+    $sql4 = "DELETE FROM feedback WHERE goal_id ='$goalID';";
+    $result4 = mysqli_query($conn, $sql4);
     $sql = "DELETE FROM goal WHERE goal_id ='$goalID';";
     $result = mysqli_query($conn, $sql);
     mysqli_close($conn);

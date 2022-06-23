@@ -33,8 +33,8 @@ $resultDelete1 = mysqli_query($conn, "SELECT * FROM mentee WHERE user_id =  $id"
 $resultDelete2 = mysqli_query($conn, "SELECT * FROM goal WHERE mentee_id =  (SELECT mentee_id FROM mentee WHERE user_id =  $id)");
 // $resultDelete6 = mysqli_query($conn, "SELECT * FROM mentor WHERE user_id =  $id");
 
-if(isset($_GET['error'])){
-    if($_GET['error']==1){
+if (isset($_GET['error'])) {
+    if ($_GET['error'] == 1) {
         echo '<script>alert("Image Upload Error - Only support jpg, jpeg, png, gif format file with less than 1Mb")</script>';
     }
 }
@@ -112,7 +112,7 @@ if(isset($_GET['error'])){
                     <li class="nav-item"><a class="nav-link" href="dashboard.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link active" href="profileUpdate.php"><i class="fas fa-user"></i><span>Profile</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="goals.php"><i class="fas fa-bullseye" style="color: rgba(255,255,255,0.42);"></i><span style="margin-left: 0px;">Goals</span></a><a class="nav-link" href="find-mentor-dashboard.php"><i class="fas fa-user-plus"></i><span>Find Mentor</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.php"><i class="far fa-user-circle"></i><span>Logout</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="logout.php"><i class="far fa-user-circle"></i><span>Logout</span></a></li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                 </ul>
@@ -154,10 +154,11 @@ if(isset($_GET['error'])){
                                             while ($row = mysqli_fetch_array($result)) {
                                                 $name = $row['user_email'];
                                                 $photo = $row['user_photo'];
-                                                if(empty($photo)){
+                                                if (empty($photo)) {
                                                     $photoSource = "assets/img/default_pp.png";
+                                                } else {
+                                                    $photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';
                                                 }
-                                                else{$photoSource = 'data:image/jpeg;base64,' . base64_encode($photo) . '';}
                                             }
                                             echo $name;
                                             ?>
@@ -224,6 +225,7 @@ if(isset($_GET['error'])){
                                                 if ($res = mysqli_fetch_array($result2)) {
                                                     echo $res['user_email'];
                                                 }
+                                                
                                                 ?>
                                             </div>
                                         </div>
