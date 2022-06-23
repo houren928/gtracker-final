@@ -35,7 +35,7 @@ include_once "include/config.php"; // Always include the database oconnection be
 
             <div class="row justify-content-center">
                 <div class="col-5">
-                    <form action="loginProcess.php?type=<?php echo($_GET['type'])?>" class="needs-validation" novalidate method="post">
+                    <form method="post" action="loginProcess.php?type=<?php echo($_GET['type'])?>" class="needs-validation" novalidate>
                         <!-- add at onsubmit -->
                         <div class="mb-4">
                             <label for="myLogInEmail" class="form-label"><strong>Email</strong></label>

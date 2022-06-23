@@ -31,7 +31,7 @@ else{
         $hashpassword = password_hash($pass1, PASSWORD_DEFAULT);
         $result = $conn -> query("UPDATE user SET user_password='$hashpassword' WHERE user_email='$email' AND user_type='$usertype'");
         if($result){
-            mysqli_query($conn,"DELETE FROM `password_reset_temp` WHERE `email`='$email'");
+            mysqli_query($conn,"DELETE FROM `password_reset_temp` WHERE `email`='$email' AND `user_type` = '$usertype'");
             echo json_encode(["success" => true, 
                               "pass1" => true, 
                               "pass2" => true, 

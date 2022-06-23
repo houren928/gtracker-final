@@ -29,7 +29,8 @@ if (!$email) {
         $addKey = substr(md5(uniqid(rand(),1)),3,10);
         $key = $key . $addKey;
      // Insert Temp Table
-     $conn -> query("INSERT INTO `password_reset_temp` (`email`, `key`, `expDate`) VALUES ('".$email."', '".$key."', '".$expDate."');");
+     $conn -> query("INSERT INTO `password_reset_temp` (`email`, `key`, `expDate`, `user_type`) 
+                     VALUES ('".$email."', '".$key."', '".$expDate."', '".$usertype."');");
      $output='<p>Dear user,</p>';
      $output.='<p>Please click on the following link to reset your password.</p>';
      $output.='<p>-------------------------------------------------------------</p>';
