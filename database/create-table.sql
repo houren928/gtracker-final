@@ -111,6 +111,6 @@ CREATE TABLE `password_reset_temp` (
   `key` varchar(250) NOT NULL,
   `expDate` datetime NOT NULL,
   `user_type` varchar(100) NOT NULL,
-  PRIMARY KEY (`key`),
+  PRIMARY KEY (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
